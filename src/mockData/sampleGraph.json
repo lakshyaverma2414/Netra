@@ -1,0 +1,1074 @@
+[
+    {
+        "data":  {
+                     "id":  "p1",
+                     "label":  "Vikram \u0027Boss\u0027 Singh",
+                     "type":  "person",
+                     "riskScore":  94,
+                     "riskLevel":  "Critical",
+                     "date":  "2023-11-24",
+                     "caseId":  "NCRB-2026-001"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "p2",
+                     "label":  "Rahul Desai",
+                     "type":  "person",
+                     "riskScore":  94,
+                     "riskLevel":  "Critical",
+                     "date":  "2023-05-03",
+                     "caseId":  "NCRB-2026-001"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "p3",
+                     "label":  "Amit Kumar",
+                     "type":  "person",
+                     "riskScore":  32,
+                     "riskLevel":  "Low",
+                     "date":  "2024-03-01",
+                     "caseId":  "NCRB-2026-001"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "p4",
+                     "label":  "Sanjay Sharma",
+                     "type":  "person",
+                     "riskScore":  38,
+                     "riskLevel":  "Low",
+                     "date":  "2023-02-25",
+                     "caseId":  "NCRB-2026-001"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "p5",
+                     "label":  "Neha Gupta",
+                     "type":  "person",
+                     "riskScore":  97,
+                     "riskLevel":  "Critical",
+                     "date":  "2023-11-01",
+                     "caseId":  "NCRB-2026-001"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "p6",
+                     "label":  "Officer X",
+                     "type":  "person",
+                     "riskScore":  28,
+                     "riskLevel":  "Low",
+                     "date":  "2023-01-26",
+                     "caseId":  "NCRB-2026-001"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "p7",
+                     "label":  "Informant 04",
+                     "type":  "person",
+                     "riskScore":  85,
+                     "riskLevel":  "High",
+                     "date":  "2024-05-14",
+                     "caseId":  "NCRB-2026-001"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "p8",
+                     "label":  "Ravi Patel",
+                     "type":  "person",
+                     "riskScore":  58,
+                     "riskLevel":  "Medium",
+                     "date":  "2023-02-09",
+                     "caseId":  "NCRB-2026-001"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "o1",
+                     "label":  "D-Syndicate",
+                     "type":  "organization",
+                     "riskScore":  95,
+                     "riskLevel":  "Critical",
+                     "date":  "2023-10-18",
+                     "caseId":  "NCRB-2026-001"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "o2",
+                     "label":  "Apex Logistics",
+                     "type":  "organization",
+                     "riskScore":  51,
+                     "riskLevel":  "Medium",
+                     "date":  "2023-03-16",
+                     "caseId":  "NCRB-2026-001"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "o3",
+                     "label":  "Global Trading LLC",
+                     "type":  "organization",
+                     "riskScore":  76,
+                     "riskLevel":  "High",
+                     "date":  "2024-05-21",
+                     "caseId":  "NCRB-2026-001"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "l1",
+                     "label":  "Safehouse Alpha",
+                     "type":  "location",
+                     "riskScore":  12,
+                     "riskLevel":  "Low",
+                     "date":  "2024-04-24",
+                     "caseId":  "NCRB-2026-001"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "l2",
+                     "label":  "Sector 4 Warehouse",
+                     "type":  "location",
+                     "riskScore":  50,
+                     "riskLevel":  "Medium",
+                     "date":  "2023-07-20",
+                     "caseId":  "NCRB-2026-001"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "l3",
+                     "label":  "Mumbai Port Terminal",
+                     "type":  "location",
+                     "riskScore":  61,
+                     "riskLevel":  "Medium",
+                     "date":  "2023-02-21",
+                     "caseId":  "NCRB-2026-001"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "v1",
+                     "label":  "SUV (MH01-XX-9999)",
+                     "type":  "vehicle",
+                     "riskScore":  43,
+                     "riskLevel":  "Medium",
+                     "date":  "2024-03-23",
+                     "caseId":  "NCRB-2026-001"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "v2",
+                     "label":  "Cargo Van",
+                     "type":  "vehicle",
+                     "riskScore":  89,
+                     "riskLevel":  "High",
+                     "date":  "2023-07-03",
+                     "caseId":  "NCRB-2026-001"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "v3",
+                     "label":  "Speedboat",
+                     "type":  "vehicle",
+                     "riskScore":  55,
+                     "riskLevel":  "Medium",
+                     "date":  "2023-12-04",
+                     "caseId":  "NCRB-2026-001"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "ph1",
+                     "label":  "+91-98765XXXXX",
+                     "type":  "phone",
+                     "riskScore":  20,
+                     "riskLevel":  "Low",
+                     "date":  "2023-11-22",
+                     "caseId":  "NCRB-2026-001"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "ph2",
+                     "label":  "+91-91234XXXXX",
+                     "type":  "phone",
+                     "riskScore":  81,
+                     "riskLevel":  "High",
+                     "date":  "2024-03-23",
+                     "caseId":  "NCRB-2026-001"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "ph3",
+                     "label":  "+44-7700-XXXXXX",
+                     "type":  "phone",
+                     "riskScore":  34,
+                     "riskLevel":  "Low",
+                     "date":  "2024-03-28",
+                     "caseId":  "NCRB-2026-001"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "e1",
+                     "source":  "p1",
+                     "target":  "o1",
+                     "label":  "Leader",
+                     "date":  "2024-01-21",
+                     "caseId":  "NCRB-2026-001"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "e2",
+                     "source":  "p2",
+                     "target":  "o1",
+                     "label":  "Lieutenant",
+                     "date":  "2024-04-02",
+                     "caseId":  "NCRB-2026-001"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "e3",
+                     "source":  "p3",
+                     "target":  "o1",
+                     "label":  "Enforcer",
+                     "date":  "2024-03-24",
+                     "caseId":  "NCRB-2026-001"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "e4",
+                     "source":  "p4",
+                     "target":  "o1",
+                     "label":  "Smuggler",
+                     "date":  "2023-11-10",
+                     "caseId":  "NCRB-2026-001"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "e5",
+                     "source":  "p5",
+                     "target":  "o2",
+                     "label":  "Director",
+                     "date":  "2023-06-19",
+                     "caseId":  "NCRB-2026-001"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "e6",
+                     "source":  "p8",
+                     "target":  "o3",
+                     "label":  "Frontman",
+                     "date":  "2023-02-23",
+                     "caseId":  "NCRB-2026-001"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "e7",
+                     "source":  "o1",
+                     "target":  "o2",
+                     "label":  "Funds",
+                     "date":  "2023-05-19",
+                     "caseId":  "NCRB-2026-001"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "e8",
+                     "source":  "o2",
+                     "target":  "o3",
+                     "label":  "Launders",
+                     "date":  "2024-04-27",
+                     "caseId":  "NCRB-2026-001"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "e9",
+                     "source":  "p1",
+                     "target":  "ph1",
+                     "label":  "Uses Burner",
+                     "date":  "2023-09-08",
+                     "caseId":  "NCRB-2026-001"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "e10",
+                     "source":  "p2",
+                     "target":  "ph2",
+                     "label":  "Uses Burner",
+                     "date":  "2023-02-10",
+                     "caseId":  "NCRB-2026-001"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "e11",
+                     "source":  "p5",
+                     "target":  "ph3",
+                     "label":  "Uses Offshore",
+                     "date":  "2023-03-12",
+                     "caseId":  "NCRB-2026-001"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "e12",
+                     "source":  "ph1",
+                     "target":  "ph2",
+                     "label":  "Calls (Frequent)",
+                     "date":  "2024-05-04",
+                     "caseId":  "NCRB-2026-001"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "e13",
+                     "source":  "ph2",
+                     "target":  "ph3",
+                     "label":  "Calls (Encrypted)",
+                     "date":  "2023-03-20",
+                     "caseId":  "NCRB-2026-001"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "e14",
+                     "source":  "p6",
+                     "target":  "ph3",
+                     "label":  "Intercepted Call",
+                     "date":  "2023-04-17",
+                     "caseId":  "NCRB-2026-001"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "e15",
+                     "source":  "p1",
+                     "target":  "l1",
+                     "label":  "Owns",
+                     "date":  "2024-05-08",
+                     "caseId":  "NCRB-2026-001"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "e16",
+                     "source":  "p2",
+                     "target":  "l1",
+                     "label":  "Visits",
+                     "date":  "2023-02-11",
+                     "caseId":  "NCRB-2026-001"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "e17",
+                     "source":  "p4",
+                     "target":  "l2",
+                     "label":  "Operates From",
+                     "date":  "2023-07-10",
+                     "caseId":  "NCRB-2026-001"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "e18",
+                     "source":  "o1",
+                     "target":  "l3",
+                     "label":  "Controls Access",
+                     "date":  "2023-02-10",
+                     "caseId":  "NCRB-2026-001"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "e19",
+                     "source":  "p4",
+                     "target":  "l3",
+                     "label":  "Smuggles Via",
+                     "date":  "2023-11-07",
+                     "caseId":  "NCRB-2026-001"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "e20",
+                     "source":  "p3",
+                     "target":  "v1",
+                     "label":  "Registered To",
+                     "date":  "2023-01-15",
+                     "caseId":  "NCRB-2026-001"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "e21",
+                     "source":  "v1",
+                     "target":  "l1",
+                     "label":  "Parked At",
+                     "date":  "2023-02-08",
+                     "caseId":  "NCRB-2026-001"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "e22",
+                     "source":  "p4",
+                     "target":  "v2",
+                     "label":  "Drives",
+                     "date":  "2023-12-30",
+                     "caseId":  "NCRB-2026-001"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "e23",
+                     "source":  "v2",
+                     "target":  "l2",
+                     "label":  "Loaded At",
+                     "date":  "2024-05-03",
+                     "caseId":  "NCRB-2026-001"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "e24",
+                     "source":  "p4",
+                     "target":  "v3",
+                     "label":  "Captains",
+                     "date":  "2024-05-07",
+                     "caseId":  "NCRB-2026-001"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "e25",
+                     "source":  "v3",
+                     "target":  "l3",
+                     "label":  "Docked At",
+                     "date":  "2023-02-21",
+                     "caseId":  "NCRB-2026-001"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "e26",
+                     "source":  "p7",
+                     "target":  "p1",
+                     "label":  "Observes",
+                     "date":  "2023-03-09",
+                     "caseId":  "NCRB-2026-001"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "e27",
+                     "source":  "p7",
+                     "target":  "l1",
+                     "label":  "Spotted At",
+                     "date":  "2023-07-09",
+                     "caseId":  "NCRB-2026-001"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "e28",
+                     "source":  "p2",
+                     "target":  "p5",
+                     "label":  "Secret Meeting",
+                     "date":  "2023-07-11",
+                     "caseId":  "NCRB-2026-001"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "e29",
+                     "source":  "p8",
+                     "target":  "p5",
+                     "label":  "Reports To",
+                     "date":  "2024-01-04",
+                     "caseId":  "NCRB-2026-001"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "e30",
+                     "source":  "p6",
+                     "target":  "o2",
+                     "label":  "Bribed By",
+                     "date":  "2023-08-29",
+                     "caseId":  "NCRB-2026-001"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "n2_p1",
+                     "caseId":  "NCRB-2026-002",
+                     "label":  "Rahul Verma",
+                     "type":  "person",
+                     "riskLevel":  "HIGH",
+                     "riskScore":  88,
+                     "date":  "2026-08-20"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "n2_org1",
+                     "caseId":  "NCRB-2026-002",
+                     "label":  "Ghost Sec",
+                     "type":  "organization",
+                     "riskLevel":  "HIGH",
+                     "riskScore":  85,
+                     "date":  "2026-08-21"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "e2_1",
+                     "caseId":  "NCRB-2026-002",
+                     "source":  "n2_p1",
+                     "target":  "n2_org1",
+                     "label":  "Leader",
+                     "date":  "2026-08-21"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "c1_p1",
+                     "label":  "Vikram \u0027Boss\u0027 Singh",
+                     "type":  "person",
+                     "riskScore":  94,
+                     "riskLevel":  "Critical",
+                     "date":  "2023-11-24",
+                     "caseId":  "CASE-2026-001"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "c1_p2",
+                     "label":  "Rahul Desai",
+                     "type":  "person",
+                     "riskScore":  94,
+                     "riskLevel":  "Critical",
+                     "date":  "2023-05-03",
+                     "caseId":  "CASE-2026-001"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "c1_p3",
+                     "label":  "Amit Kumar",
+                     "type":  "person",
+                     "riskScore":  32,
+                     "riskLevel":  "Low",
+                     "date":  "2024-03-01",
+                     "caseId":  "CASE-2026-001"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "c1_p4",
+                     "label":  "Sanjay Sharma",
+                     "type":  "person",
+                     "riskScore":  38,
+                     "riskLevel":  "Low",
+                     "date":  "2023-02-25",
+                     "caseId":  "CASE-2026-001"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "c1_p5",
+                     "label":  "Neha Gupta",
+                     "type":  "person",
+                     "riskScore":  97,
+                     "riskLevel":  "Critical",
+                     "date":  "2023-11-01",
+                     "caseId":  "CASE-2026-001"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "c1_p6",
+                     "label":  "Officer X",
+                     "type":  "person",
+                     "riskScore":  28,
+                     "riskLevel":  "Low",
+                     "date":  "2023-01-26",
+                     "caseId":  "CASE-2026-001"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "c1_p7",
+                     "label":  "Informant 04",
+                     "type":  "person",
+                     "riskScore":  85,
+                     "riskLevel":  "High",
+                     "date":  "2024-05-14",
+                     "caseId":  "CASE-2026-001"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "c1_p8",
+                     "label":  "Ravi Patel",
+                     "type":  "person",
+                     "riskScore":  58,
+                     "riskLevel":  "Medium",
+                     "date":  "2023-02-09",
+                     "caseId":  "CASE-2026-001"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "c1_o1",
+                     "label":  "D-Syndicate",
+                     "type":  "organization",
+                     "riskScore":  95,
+                     "riskLevel":  "Critical",
+                     "date":  "2023-10-18",
+                     "caseId":  "CASE-2026-001"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "c1_o2",
+                     "label":  "Apex Logistics",
+                     "type":  "organization",
+                     "riskScore":  51,
+                     "riskLevel":  "Medium",
+                     "date":  "2023-03-16",
+                     "caseId":  "CASE-2026-001"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "c1_o3",
+                     "label":  "Global Trading LLC",
+                     "type":  "organization",
+                     "riskScore":  76,
+                     "riskLevel":  "High",
+                     "date":  "2024-05-21",
+                     "caseId":  "CASE-2026-001"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "c1_l1",
+                     "label":  "Safehouse Alpha",
+                     "type":  "location",
+                     "riskScore":  12,
+                     "riskLevel":  "Low",
+                     "date":  "2024-04-24",
+                     "caseId":  "CASE-2026-001"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "c1_l2",
+                     "label":  "Sector 4 Warehouse",
+                     "type":  "location",
+                     "riskScore":  50,
+                     "riskLevel":  "Medium",
+                     "date":  "2023-07-20",
+                     "caseId":  "CASE-2026-001"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "c1_l3",
+                     "label":  "Mumbai Port Terminal",
+                     "type":  "location",
+                     "riskScore":  61,
+                     "riskLevel":  "Medium",
+                     "date":  "2023-02-21",
+                     "caseId":  "CASE-2026-001"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "c1_v1",
+                     "label":  "SUV (MH01-XX-9999)",
+                     "type":  "vehicle",
+                     "riskScore":  43,
+                     "riskLevel":  "Medium",
+                     "date":  "2024-03-23",
+                     "caseId":  "CASE-2026-001"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "c1_v2",
+                     "label":  "Cargo Van",
+                     "type":  "vehicle",
+                     "riskScore":  89,
+                     "riskLevel":  "High",
+                     "date":  "2023-07-03",
+                     "caseId":  "CASE-2026-001"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "c1_v3",
+                     "label":  "Speedboat",
+                     "type":  "vehicle",
+                     "riskScore":  55,
+                     "riskLevel":  "Medium",
+                     "date":  "2023-12-04",
+                     "caseId":  "CASE-2026-001"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "c1_ph1",
+                     "label":  "+91-98765XXXXX",
+                     "type":  "phone",
+                     "riskScore":  20,
+                     "riskLevel":  "Low",
+                     "date":  "2023-11-22",
+                     "caseId":  "CASE-2026-001"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "c1_ph2",
+                     "label":  "+91-91234XXXXX",
+                     "type":  "phone",
+                     "riskScore":  81,
+                     "riskLevel":  "High",
+                     "date":  "2024-03-23",
+                     "caseId":  "CASE-2026-001"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "c1_ph3",
+                     "label":  "+44-7700-XXXXXX",
+                     "type":  "phone",
+                     "riskScore":  34,
+                     "riskLevel":  "Low",
+                     "date":  "2024-03-28",
+                     "caseId":  "CASE-2026-001"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "c1_e1",
+                     "source":  "c1_p1",
+                     "target":  "c1_o1",
+                     "label":  "Leader",
+                     "date":  "2024-01-21",
+                     "caseId":  "CASE-2026-001"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "c1_e2",
+                     "source":  "c1_p2",
+                     "target":  "c1_o1",
+                     "label":  "Lieutenant",
+                     "date":  "2024-04-02",
+                     "caseId":  "CASE-2026-001"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "c1_e3",
+                     "source":  "c1_p3",
+                     "target":  "c1_o1",
+                     "label":  "Enforcer",
+                     "date":  "2024-03-24",
+                     "caseId":  "CASE-2026-001"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "c1_e4",
+                     "source":  "c1_p4",
+                     "target":  "c1_o1",
+                     "label":  "Smuggler",
+                     "date":  "2023-11-10",
+                     "caseId":  "CASE-2026-001"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "c1_e5",
+                     "source":  "c1_p5",
+                     "target":  "c1_o2",
+                     "label":  "Director",
+                     "date":  "2023-06-19",
+                     "caseId":  "CASE-2026-001"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "c1_e6",
+                     "source":  "c1_p8",
+                     "target":  "c1_o3",
+                     "label":  "Frontman",
+                     "date":  "2023-02-23",
+                     "caseId":  "CASE-2026-001"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "c1_e7",
+                     "source":  "c1_o1",
+                     "target":  "c1_o2",
+                     "label":  "Funds",
+                     "date":  "2023-05-19",
+                     "caseId":  "CASE-2026-001"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "c1_e8",
+                     "source":  "c1_o2",
+                     "target":  "c1_o3",
+                     "label":  "Launders",
+                     "date":  "2024-04-27",
+                     "caseId":  "CASE-2026-001"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "c1_e9",
+                     "source":  "c1_p1",
+                     "target":  "c1_ph1",
+                     "label":  "Uses Burner",
+                     "date":  "2023-09-08",
+                     "caseId":  "CASE-2026-001"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "c1_e10",
+                     "source":  "c1_p2",
+                     "target":  "c1_ph2",
+                     "label":  "Uses Burner",
+                     "date":  "2023-02-10",
+                     "caseId":  "CASE-2026-001"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "c1_e11",
+                     "source":  "c1_p5",
+                     "target":  "c1_ph3",
+                     "label":  "Uses Offshore",
+                     "date":  "2023-03-12",
+                     "caseId":  "CASE-2026-001"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "c1_e12",
+                     "source":  "c1_ph1",
+                     "target":  "c1_ph2",
+                     "label":  "Calls (Frequent)",
+                     "date":  "2024-05-04",
+                     "caseId":  "CASE-2026-001"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "c1_e13",
+                     "source":  "c1_ph2",
+                     "target":  "c1_ph3",
+                     "label":  "Calls (Encrypted)",
+                     "date":  "2023-03-20",
+                     "caseId":  "CASE-2026-001"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "c1_e14",
+                     "source":  "c1_p6",
+                     "target":  "c1_ph3",
+                     "label":  "Intercepted Call",
+                     "date":  "2023-04-17",
+                     "caseId":  "CASE-2026-001"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "c1_e15",
+                     "source":  "c1_p1",
+                     "target":  "c1_l1",
+                     "label":  "Owns",
+                     "date":  "2024-05-08",
+                     "caseId":  "CASE-2026-001"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "c1_e16",
+                     "source":  "c1_p2",
+                     "target":  "c1_l1",
+                     "label":  "Visits",
+                     "date":  "2023-02-11",
+                     "caseId":  "CASE-2026-001"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "c1_e17",
+                     "source":  "c1_p4",
+                     "target":  "c1_l2",
+                     "label":  "Operates From",
+                     "date":  "2023-07-10",
+                     "caseId":  "CASE-2026-001"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "c1_e18",
+                     "source":  "c1_o1",
+                     "target":  "c1_l3",
+                     "label":  "Controls Access",
+                     "date":  "2023-02-10",
+                     "caseId":  "CASE-2026-001"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "c1_e19",
+                     "source":  "c1_p4",
+                     "target":  "c1_l3",
+                     "label":  "Smuggles Via",
+                     "date":  "2023-11-07",
+                     "caseId":  "CASE-2026-001"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "c1_e20",
+                     "source":  "c1_p3",
+                     "target":  "c1_v1",
+                     "label":  "Registered To",
+                     "date":  "2023-01-15",
+                     "caseId":  "CASE-2026-001"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "c1_e21",
+                     "source":  "c1_v1",
+                     "target":  "c1_l1",
+                     "label":  "Parked At",
+                     "date":  "2023-02-08",
+                     "caseId":  "CASE-2026-001"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "c1_e22",
+                     "source":  "c1_p4",
+                     "target":  "c1_v2",
+                     "label":  "Drives",
+                     "date":  "2023-12-30",
+                     "caseId":  "CASE-2026-001"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "c1_e23",
+                     "source":  "c1_v2",
+                     "target":  "c1_l2",
+                     "label":  "Loaded At",
+                     "date":  "2024-05-03",
+                     "caseId":  "CASE-2026-001"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "c1_e24",
+                     "source":  "c1_p4",
+                     "target":  "c1_v3",
+                     "label":  "Captains",
+                     "date":  "2024-05-07",
+                     "caseId":  "CASE-2026-001"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "c1_e25",
+                     "source":  "c1_v3",
+                     "target":  "c1_l3",
+                     "label":  "Docked At",
+                     "date":  "2023-02-21",
+                     "caseId":  "CASE-2026-001"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "c1_e26",
+                     "source":  "c1_p7",
+                     "target":  "c1_p1",
+                     "label":  "Observes",
+                     "date":  "2023-03-09",
+                     "caseId":  "CASE-2026-001"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "c1_e27",
+                     "source":  "c1_p7",
+                     "target":  "c1_l1",
+                     "label":  "Spotted At",
+                     "date":  "2023-07-09",
+                     "caseId":  "CASE-2026-001"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "c1_e28",
+                     "source":  "c1_p2",
+                     "target":  "c1_p5",
+                     "label":  "Secret Meeting",
+                     "date":  "2023-07-11",
+                     "caseId":  "CASE-2026-001"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "c1_e29",
+                     "source":  "c1_p8",
+                     "target":  "c1_p5",
+                     "label":  "Reports To",
+                     "date":  "2024-01-04",
+                     "caseId":  "CASE-2026-001"
+                 }
+    },
+    {
+        "data":  {
+                     "id":  "c1_e30",
+                     "source":  "c1_p6",
+                     "target":  "c1_o2",
+                     "label":  "Bribed By",
+                     "date":  "2023-08-29",
+                     "caseId":  "CASE-2026-001"
+                 }
+    }
+]

@@ -1,0 +1,97 @@
+﻿[
+  {
+    "entity_id": "P001",
+    "entity_type": "PERSON",
+    "canonical_name": "Rahul Sharma",
+    "aliases": ["R Sharma", "Rocky", "Rahul S."],
+    "confidence": 1.0
+  },
+  {
+    "entity_id": "P002",
+    "entity_type": "PERSON",
+    "canonical_name": "Amit Kumar",
+    "aliases": ["Amit"],
+    "confidence": 1.0
+  },
+  {
+    "entity_id": "P003",
+    "entity_type": "PERSON",
+    "canonical_name": "Priya Desai",
+    "aliases": ["P. Desai"],
+    "confidence": 1.0
+  },
+  {
+    "entity_id": "P004",
+    "entity_type": "PERSON",
+    "canonical_name": "Vikram Boss Singh",
+    "aliases": ["Vikram", "Boss"],
+    "confidence": 1.0
+  },
+  {
+    "entity_id": "PHONE001",
+    "entity_type": "PHONE",
+    "canonical_name": "+91-9876543210",
+    "confidence": 1.0
+  },
+  {
+    "entity_id": "PHONE002",
+    "entity_type": "PHONE",
+    "canonical_name": "+91-9123456789",
+    "confidence": 1.0
+  },
+  {
+    "entity_id": "PHONE003",
+    "entity_type": "PHONE",
+    "canonical_name": "+44-7700900000",
+    "confidence": 1.0
+  },
+  {
+    "entity_id": "UPI001",
+    "entity_type": "UPI_ACCOUNT",
+    "canonical_name": "amit@ybl",
+    "confidence": 1.0
+  },
+  {
+    "entity_id": "UPI002",
+    "entity_type": "UPI_ACCOUNT",
+    "canonical_name": "priya.d@okicici",
+    "confidence": 1.0
+  },
+  {
+    "entity_id": "VEHICLE001",
+    "entity_type": "VEHICLE",
+    "canonical_name": "MP-09-AB-1234",
+    "aliases": ["MP09AB1234", "MP 09 AB 1234"],
+    "confidence": 1.0
+  },
+  {
+    "entity_id": "LOCATION001",
+    "entity_type": "LOCATION",
+    "canonical_name": "Central Market",
+    "confidence": 1.0
+  },
+  {
+    "entity_id": "LOCATION002",
+    "entity_type": "LOCATION",
+    "canonical_name": "Safehouse Alpha",
+    "confidence": 1.0
+  },
+  {
+    "entity_id": "ORG001",
+    "entity_type": "ORGANIZATION",
+    "canonical_name": "D-Syndicate",
+    "confidence": 1.0
+  },
+  {
+    "entity_id": "CASE001",
+    "entity_type": "CASE",
+    "canonical_name": "FIR-2026-001",
+    "confidence": 1.0
+  },
+  {
+    "entity_id": "CASE002",
+    "entity_type": "CASE",
+    "canonical_name": "FIR-2026-002",
+    "confidence": 1.0
+  }
+]

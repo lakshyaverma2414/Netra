@@ -1,0 +1,102 @@
+[
+    {
+        "id": "NCRB-2026-001",
+        "title": "Operation Black Web",
+        "status": "ACTIVE",
+        "risk": "CRITICAL",
+        "entities": {
+            "persons": 8,
+            "organizations": 3,
+            "vehicles": 4,
+            "locations": 6
+        },
+        "investigationProgress": 78,
+        "tasks": {
+            "completed": 12,
+            "total": 15
+        },
+        "evidence": 34,
+        "leads": 5,
+        "assignedOfficer": "Inspector Vikram",
+        "lastActivity": "Today, 4:30 PM",
+        "creationDate": "2026-08-15"
+    },
+    {
+        "id": "NCRB-2026-002",
+        "title": "Syndicate Ghost",
+        "status": "ACTIVE",
+        "risk": "HIGH",
+        "entities": {
+            "persons": 5,
+            "organizations": 1,
+            "vehicles": 2,
+            "locations": 2
+        },
+        "investigationProgress": 45,
+        "tasks": {
+            "completed": 4,
+            "total": 10
+        },
+        "evidence": 12,
+        "leads": 2,
+        "assignedOfficer": "Inspector Vikram",
+        "lastActivity": "Yesterday, 11:20 AM",
+        "creationDate": "2026-08-20"
+    },
+    {
+        "id": "NCRB-2026-003",
+        "title": "Border Smuggling Route",
+        "status": "CLOSED",
+        "risk": "LOW",
+        "entities": {
+            "persons": 12,
+            "organizations": 2,
+            "vehicles": 8,
+            "locations": 4
+        },
+        "investigationProgress": 100,
+        "tasks": {
+            "completed": 20,
+            "total": 20
+        },
+        "evidence": 56,
+        "leads": 0,
+        "assignedOfficer": "ACP Sharma",
+        "lastActivity": "2026-07-10",
+        "creationDate": "2026-02-12",
+        "finalPerpetrator": "Rajesh Kumar",
+        "keyFindings": "Interstate smuggling ring dismantled. Contraband seized at border checkpost."
+    },
+    {
+        "crimeType": "Organized Crime",
+        "id": "CASE-2026-001",
+        "lastActivity": "Today, 10:00 AM",
+        "leads": 3,
+        "title": "Operation Shadow",
+        "location": "Mumbai",
+        "tasks": {
+            "total": 10,
+            "completed": 2
+        },
+        "description": "Suspected syndicate operation.",
+        "evidence": 5,
+        "creationDate": "2026-09-01",
+        "assignedOfficer": "Inspector Vikram",
+        "investigationProgress": 20,
+        "risk": "HIGH",
+        "finalResult": "Investigation Ongoing",
+        "dateOfIncident": "2026-08-15",
+        "status": "ACTIVE",
+        "initialSuspect": {
+            "name": "Ajay",
+            "phone": "9876543210",
+            "address": "Mumbai"
+        },
+        "entities": {
+            "vehicles": 0,
+            "persons": 3,
+            "locations": 2,
+            "organizations": 1
+        }
+    }
+]

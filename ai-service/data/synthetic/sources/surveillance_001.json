@@ -1,0 +1,42 @@
+﻿[
+  {
+    "evidence_id": "E004",
+    "observed_person": "Amit",
+    "notes": "Subject identified using device with number +91-9123456789."
+  },
+  {
+    "evidence_id": "E005",
+    "observed_person": "Amit Kumar",
+    "notes": "Subject seen entering D-Syndicate operational front."
+  },
+  {
+    "evidence_id": "E006",
+    "observed_person": "Amit",
+    "notes": "Subject confirmed as owner of UPI handle amit@ybl."
+  },
+  {
+    "evidence_id": "E008",
+    "observed_person": "P. Desai",
+    "notes": "Subject operates financial account priya.d@okicici."
+  },
+  {
+    "evidence_id": "E009",
+    "observed_person": "Priya Desai",
+    "notes": "Subject holds registration for MP09AB1234."
+  },
+  {
+    "evidence_id": "E012",
+    "observed_person": "Vikram",
+    "notes": "Subject uses international number +44-7700900000."
+  },
+  {
+    "evidence_id": "E014",
+    "location": "Safehouse Alpha",
+    "vehicle_number": "MP 09 AB 1234"
+  },
+  {
+    "evidence_id": "E015",
+    "observed_person": "P. Desai",
+    "location": "Safehouse Alpha"
+  }
+]

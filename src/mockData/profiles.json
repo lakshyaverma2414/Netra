@@ -1,0 +1,74 @@
+[
+  {
+    "id": "P-001",
+    "caseId": "NCRB-2026-001",
+    "name": "Neha Gupta",
+    "alias": "The Banker",
+    "riskLevel": "CRITICAL",
+    "riskScore": 97,
+    "role": "Financier",
+    "knownAssociates": 4,
+    "locations": 3,
+    "incidents": 2,
+    "status": "AT LARGE",
+    "photo": "https://i.pravatar.cc/150?u=neha",
+    "details": {
+      "history": "Arrested in 2021 for money laundering. Released on bail.",
+      "organizations": [
+        "Global Finance Hub",
+        "Shadow Shell Corp"
+      ],
+      "timeline": [
+        "2026-08-01: Flagged in suspicious transactions",
+        "2026-08-15: Linked to Black Web"
+      ]
+    }
+  },
+  {
+    "id": "P-002",
+    "caseId": "NCRB-2026-001",
+    "name": "Vikram Singh",
+    "alias": "Boss",
+    "riskLevel": "HIGH",
+    "riskScore": 94,
+    "role": "Leader",
+    "knownAssociates": 8,
+    "locations": 5,
+    "incidents": 4,
+    "status": "SURVEILLANCE",
+    "photo": "https://i.pravatar.cc/150?u=vikram",
+    "details": {
+      "history": "Multiple convictions for extortion.",
+      "organizations": [
+        "The Singh Cartel"
+      ],
+      "timeline": [
+        "2026-07-22: Seen at warehouse",
+        "2026-08-10: Meeting with Neha Gupta"
+      ]
+    }
+  },
+  {
+    "id": "P-003",
+    "caseId": "NCRB-2026-002",
+    "name": "Rahul Verma",
+    "alias": "Ghost",
+    "riskLevel": "HIGH",
+    "riskScore": 88,
+    "role": "Hacker",
+    "knownAssociates": 2,
+    "locations": 1,
+    "incidents": 5,
+    "status": "UNKNOWN",
+    "photo": "https://i.pravatar.cc/150?u=rahul",
+    "details": {
+      "history": "Wanted for cyber terrorism.",
+      "organizations": [
+        "Ghost Sec"
+      ],
+      "timeline": [
+        "2026-08-20: Network breach at City Bank"
+      ]
+    }
+  }
+]
