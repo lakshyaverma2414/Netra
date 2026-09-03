@@ -1,0 +1,68 @@
+﻿[
+    {
+        "id": "C-001",
+        "title": "Operation Black Web",
+        "status": "ACTIVE",
+        "risk": "CRITICAL",
+        "entities": {
+            "persons": 8,
+            "organizations": 3,
+            "vehicles": 4,
+            "locations": 6
+        },
+        "investigationProgress": 78,
+        "tasks": {
+            "completed": 12,
+            "total": 15
+        },
+        "evidence": 34,
+        "leads": 5,
+        "assignedOfficer": "Inspector Vikram",
+        "lastActivity": "Today, 4:30 PM",
+        "creationDate": "2026-08-15"
+    },
+    {
+        "id": "C-002",
+        "title": "Syndicate Ghost",
+        "status": "ACTIVE",
+        "risk": "HIGH",
+        "entities": {
+            "persons": 5,
+            "organizations": 1,
+            "vehicles": 2,
+            "locations": 2
+        },
+        "investigationProgress": 45,
+        "tasks": {
+            "completed": 4,
+            "total": 10
+        },
+        "evidence": 12,
+        "leads": 2,
+        "assignedOfficer": "Inspector Vikram",
+        "lastActivity": "Yesterday, 11:20 AM",
+        "creationDate": "2026-08-20"
+    },
+    {
+        "id": "C-003",
+        "title": "Border Route",
+        "status": "ACTIVE",
+        "risk": "MEDIUM",
+        "entities": {
+            "persons": 12,
+            "organizations": 2,
+            "vehicles": 8,
+            "locations": 4
+        },
+        "investigationProgress": 30,
+        "tasks": {
+            "completed": 5,
+            "total": 20
+        },
+        "evidence": 56,
+        "leads": 3,
+        "assignedOfficer": "ACP Sharma",
+        "lastActivity": "Today, 10:10 AM",
+        "creationDate": "2026-02-12"
+    }
+]

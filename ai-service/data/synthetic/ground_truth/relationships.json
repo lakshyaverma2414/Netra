@@ -1,0 +1,155 @@
+﻿[
+  {
+    "relationship_id": "REL001",
+    "source_entity": "P001",
+    "target_entity": "PHONE001",
+    "relation_type": "USES",
+    "status": "CONFIRMED",
+    "confidence": 1.0,
+    "evidence_ids": ["E001"]
+  },
+  {
+    "relationship_id": "REL002",
+    "source_entity": "P001",
+    "target_entity": "LOCATION001",
+    "relation_type": "LOCATED_AT",
+    "status": "CONFIRMED",
+    "confidence": 1.0,
+    "evidence_ids": ["E002"]
+  },
+  {
+    "relationship_id": "REL003",
+    "source_entity": "PHONE001",
+    "target_entity": "PHONE002",
+    "relation_type": "COMMUNICATES_WITH",
+    "status": "CONFIRMED",
+    "confidence": 1.0,
+    "evidence_ids": ["E003"]
+  },
+  {
+    "relationship_id": "REL004",
+    "source_entity": "P002",
+    "target_entity": "PHONE002",
+    "relation_type": "USES",
+    "status": "CONFIRMED",
+    "confidence": 1.0,
+    "evidence_ids": ["E004"]
+  },
+  {
+    "relationship_id": "REL005",
+    "source_entity": "P002",
+    "target_entity": "ORG001",
+    "relation_type": "ASSOCIATED_WITH",
+    "status": "CONFIRMED",
+    "confidence": 1.0,
+    "evidence_ids": ["E005"]
+  },
+  {
+    "relationship_id": "REL006",
+    "source_entity": "P002",
+    "target_entity": "UPI001",
+    "relation_type": "OWNS",
+    "status": "CONFIRMED",
+    "confidence": 1.0,
+    "evidence_ids": ["E006"]
+  },
+  {
+    "relationship_id": "REL007",
+    "source_entity": "UPI001",
+    "target_entity": "UPI002",
+    "relation_type": "TRANSFERRED_TO",
+    "status": "CONFIRMED",
+    "confidence": 1.0,
+    "evidence_ids": ["E007"]
+  },
+  {
+    "relationship_id": "REL008",
+    "source_entity": "P003",
+    "target_entity": "UPI002",
+    "relation_type": "OWNS",
+    "status": "CONFIRMED",
+    "confidence": 1.0,
+    "evidence_ids": ["E008"]
+  },
+  {
+    "relationship_id": "REL009",
+    "source_entity": "P003",
+    "target_entity": "VEHICLE001",
+    "relation_type": "OWNS",
+    "status": "CONFIRMED",
+    "confidence": 1.0,
+    "evidence_ids": ["E009"]
+  },
+  {
+    "relationship_id": "REL010",
+    "source_entity": "VEHICLE001",
+    "target_entity": "CASE002",
+    "relation_type": "LINKED_TO",
+    "status": "CONFIRMED",
+    "confidence": 1.0,
+    "evidence_ids": ["E010"]
+  },
+  {
+    "relationship_id": "REL011",
+    "source_entity": "P004",
+    "target_entity": "ORG001",
+    "relation_type": "ASSOCIATED_WITH",
+    "status": "CONFIRMED",
+    "confidence": 1.0,
+    "evidence_ids": ["E011"]
+  },
+  {
+    "relationship_id": "REL012",
+    "source_entity": "P004",
+    "target_entity": "PHONE003",
+    "relation_type": "USES",
+    "status": "CONFIRMED",
+    "confidence": 1.0,
+    "evidence_ids": ["E012"]
+  },
+  {
+    "relationship_id": "REL013",
+    "source_entity": "PHONE003",
+    "target_entity": "PHONE002",
+    "relation_type": "COMMUNICATES_WITH",
+    "status": "CONFIRMED",
+    "confidence": 1.0,
+    "evidence_ids": ["E013"]
+  },
+  {
+    "relationship_id": "REL014",
+    "source_entity": "VEHICLE001",
+    "target_entity": "LOCATION002",
+    "relation_type": "LOCATED_AT",
+    "status": "CONFIRMED",
+    "confidence": 1.0,
+    "evidence_ids": ["E014"]
+  },
+  {
+    "relationship_id": "REL015",
+    "source_entity": "P003",
+    "target_entity": "LOCATION002",
+    "relation_type": "LOCATED_AT",
+    "status": "CONFIRMED",
+    "confidence": 1.0,
+    "evidence_ids": ["E015"]
+  },
+  {
+    "relationship_id": "REL016",
+    "source_entity": "P004",
+    "target_entity": "CASE001",
+    "relation_type": "LINKED_TO",
+    "status": "CONFIRMED",
+    "confidence": 1.0,
+    "evidence_ids": ["E011"]
+  },
+  {
+    "relationship_id": "REL017",
+    "source_entity": "P001",
+    "target_entity": "CASE001",
+    "relation_type": "INVOLVED_IN",
+    "status": "CONFIRMED",
+    "confidence": 1.0,
+    "evidence_ids": ["E001"]
+  }
+]

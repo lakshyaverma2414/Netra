@@ -1,0 +1,32 @@
+﻿[
+  {
+    "source_entity": "P001",
+    "relation_type": "USES",
+    "target_entity": "PHONE001",
+    "evidence_ids": ["Q1"]
+  },
+  {
+    "source_entity": "P001",
+    "relation_type": "OWNS",
+    "target_entity": "VEHICLE001",
+    "evidence_ids": ["Q2"]
+  },
+  {
+    "source_entity": "P001",
+    "relation_type": "ASSOCIATED_WITH",
+    "target_entity": "P002",
+    "evidence_ids": ["Q3"]
+  },
+  {
+    "source_entity": "P001",
+    "relation_type": "LOCATED_AT",
+    "target_entity": "LOCATION002",
+    "evidence_ids": ["Q3"]
+  },
+  {
+    "source_entity": "P002",
+    "relation_type": "LOCATED_AT",
+    "target_entity": "LOCATION002",
+    "evidence_ids": ["Q3"]
+  }
+]

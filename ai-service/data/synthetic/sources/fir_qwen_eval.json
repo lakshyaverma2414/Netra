@@ -1,0 +1,22 @@
+﻿[
+  {
+    "evidence_id": "Q1",
+    "text": "Rahul was seen using phone 9876543210."
+  },
+  {
+    "evidence_id": "Q2",
+    "text": "Vehicle MP09AB1234 is owned by Rahul."
+  },
+  {
+    "evidence_id": "Q3",
+    "text": "Rahul was frequently meeting Amit near Bhopal railway station."
+  },
+  {
+    "evidence_id": "Q4",
+    "text": "The report does not state that Rahul owns vehicle MP09AB1234."
+  },
+  {
+    "evidence_id": "Q5",
+    "text": "Priya Desai was mentioned in the report."
+  }
+]

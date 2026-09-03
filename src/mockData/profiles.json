@@ -1,0 +1,65 @@
+﻿[
+  {
+    "id": "P-001",
+    "caseId": "C-001",
+    "name": "Aryan",
+    "alias": "Shadow",
+    "riskLevel": "HIGH",
+    "riskScore": 80,
+    "role": "Trafficker",
+    "knownAssociates": 2,
+    "locations": 1,
+    "incidents": 1,
+    "status": "ARRESTED",
+    "photo": "https://i.pravatar.cc/150?u=aryan",
+    "details": {
+      "history": "Arrested with burner phones linked to dark web trafficking.",
+      "organizations": ["Black Web Cartel"],
+      "timeline": [
+        "2026-08-14: Arrested at Sector 12 Warehouse"
+      ]
+    }
+  },
+  {
+    "id": "P-002",
+    "caseId": "C-002",
+    "name": "Vikram Singh",
+    "alias": "Boss",
+    "riskLevel": "CRITICAL",
+    "riskScore": 95,
+    "role": "Financier",
+    "knownAssociates": 4,
+    "locations": 3,
+    "incidents": 4,
+    "status": "AT LARGE",
+    "photo": "https://i.pravatar.cc/150?u=vikram",
+    "details": {
+      "history": "EOW suspect running hawala operations and Ghost Shell Co.",
+      "organizations": ["Ghost Shell Co"],
+      "timeline": [
+        "2026-08-20: Bulk UPI transfers detected"
+      ]
+    }
+  },
+  {
+    "id": "P-003",
+    "caseId": "C-003",
+    "name": "Rajan",
+    "alias": "Raj",
+    "riskLevel": "HIGH",
+    "riskScore": 75,
+    "role": "Fleet Operator",
+    "knownAssociates": 2,
+    "locations": 2,
+    "incidents": 2,
+    "status": "SURVEILLANCE",
+    "photo": "https://i.pravatar.cc/150?u=rajan",
+    "details": {
+      "history": "Owns fleet of vehicles used in border smuggling.",
+      "organizations": ["Rajan Transport"],
+      "timeline": [
+        "2026-08-21: Vehicle RJ-14-XYZ crossed border"
+      ]
+    }
+  }
+]

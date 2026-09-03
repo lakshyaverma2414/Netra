@@ -1,0 +1,235 @@
+[
+    {
+        "data": {
+            "id": "P-001",
+            "label": "Aryan",
+            "type": "person",
+            "riskScore": 80,
+            "riskLevel": "High",
+            "caseIds": [
+                "C-001"
+            ]
+        }
+    },
+    {
+        "data": {
+            "id": "PH-001",
+            "label": "+91-9876543210",
+            "type": "phone",
+            "riskScore": 60,
+            "riskLevel": "Medium",
+            "caseIds": [
+                "C-001"
+            ]
+        }
+    },
+    {
+        "data": {
+            "id": "LOC-001",
+            "label": "Sector 12 Warehouse",
+            "type": "location",
+            "riskScore": 40,
+            "riskLevel": "Low",
+            "caseIds": [
+                "C-001"
+            ]
+        }
+    },
+    {
+        "data": {
+            "id": "PH-002",
+            "label": "+91-9999988888",
+            "type": "phone",
+            "riskScore": 90,
+            "riskLevel": "Critical",
+            "caseIds": [
+                "C-001",
+                "C-002"
+            ]
+        }
+    },
+    {
+        "data": {
+            "id": "P-002",
+            "label": "Vikram Singh",
+            "type": "person",
+            "riskScore": 95,
+            "riskLevel": "Critical",
+            "caseIds": [
+                "C-002",
+                "C-003"
+            ]
+        }
+    },
+    {
+        "data": {
+            "id": "UPI-001",
+            "label": "ghost@bank",
+            "type": "upi",
+            "riskScore": 85,
+            "riskLevel": "High",
+            "caseIds": [
+                "C-002",
+                "C-003"
+            ]
+        }
+    },
+    {
+        "data": {
+            "id": "ORG-001",
+            "label": "Ghost Shell Co",
+            "type": "organization",
+            "riskScore": 50,
+            "riskLevel": "Medium",
+            "caseIds": [
+                "C-002"
+            ]
+        }
+    },
+    {
+        "data": {
+            "id": "P-003",
+            "label": "Rajan",
+            "type": "person",
+            "riskScore": 75,
+            "riskLevel": "High",
+            "caseIds": [
+                "C-003"
+            ]
+        }
+    },
+    {
+        "data": {
+            "id": "VEH-001",
+            "label": "RJ-14-XYZ",
+            "type": "vehicle",
+            "riskScore": 65,
+            "riskLevel": "Medium",
+            "caseIds": [
+                "C-003"
+            ]
+        }
+    },
+    {
+        "data": {
+            "id": "LOC-002",
+            "label": "Border Post Alpha",
+            "type": "location",
+            "riskScore": 20,
+            "riskLevel": "Low",
+            "caseIds": [
+                "C-003"
+            ]
+        }
+    },
+    {
+        "data": {
+            "id": "e1",
+            "source": "P-001",
+            "target": "PH-001",
+            "label": "USES",
+            "caseIds": [
+                "C-001"
+            ]
+        }
+    },
+    {
+        "data": {
+            "id": "e2",
+            "source": "P-001",
+            "target": "LOC-001",
+            "label": "LOCATED_AT",
+            "caseIds": [
+                "C-001"
+            ]
+        }
+    },
+    {
+        "data": {
+            "id": "e3",
+            "source": "PH-001",
+            "target": "PH-002",
+            "label": "COMMUNICATES_WITH",
+            "caseIds": [
+                "C-001"
+            ]
+        }
+    },
+    {
+        "data": {
+            "id": "e4",
+            "source": "P-002",
+            "target": "PH-002",
+            "label": "USES",
+            "caseIds": [
+                "C-002"
+            ]
+        }
+    },
+    {
+        "data": {
+            "id": "e5",
+            "source": "P-002",
+            "target": "UPI-001",
+            "label": "TRANSFERRED_TO",
+            "caseIds": [
+                "C-002"
+            ]
+        }
+    },
+    {
+        "data": {
+            "id": "e6",
+            "source": "P-002",
+            "target": "ORG-001",
+            "label": "OWNS",
+            "caseIds": [
+                "C-002"
+            ]
+        }
+    },
+    {
+        "data": {
+            "id": "e7",
+            "source": "P-002",
+            "target": "P-003",
+            "label": "ASSOCIATED_WITH",
+            "caseIds": [
+                "C-003"
+            ]
+        }
+    },
+    {
+        "data": {
+            "id": "e8",
+            "source": "P-003",
+            "target": "VEH-001",
+            "label": "OWNS",
+            "caseIds": [
+                "C-003"
+            ]
+        }
+    },
+    {
+        "data": {
+            "id": "e9",
+            "source": "P-003",
+            "target": "UPI-001",
+            "label": "OWNS",
+            "caseIds": [
+                "C-003"
+            ]
+        }
+    },
+    {
+        "data": {
+            "id": "e10",
+            "source": "VEH-001",
+            "target": "LOC-002",
+            "label": "LOCATED_AT",
+            "caseIds": [
+                "C-003"
+            ]
+        }
+    }
+]
