@@ -58,14 +58,6 @@
 		</dependency>
 
 
-		<!-- ====================================== -->
-		<!-- Neo4j                                  -->
-		<!-- Criminal Network Graph ke liye        -->
-		<!-- ====================================== -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-neo4j</artifactId>
-		</dependency>
 
 
 		<!-- ====================================== -->
