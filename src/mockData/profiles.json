@@ -1,73 +1,64 @@
-[
+﻿[
   {
     "id": "P-001",
-    "caseId": "NCRB-2026-001",
-    "name": "Neha Gupta",
-    "alias": "The Banker",
-    "riskLevel": "CRITICAL",
-    "riskScore": 97,
-    "role": "Financier",
-    "knownAssociates": 4,
-    "locations": 3,
-    "incidents": 2,
-    "status": "AT LARGE",
-    "photo": "https://i.pravatar.cc/150?u=neha",
+    "caseId": "C-001",
+    "name": "Aryan",
+    "alias": "Shadow",
+    "riskLevel": "HIGH",
+    "riskScore": 80,
+    "role": "Trafficker",
+    "knownAssociates": 2,
+    "locations": 1,
+    "incidents": 1,
+    "status": "ARRESTED",
+    "photo": "https://i.pravatar.cc/150?u=aryan",
     "details": {
-      "history": "Arrested in 2021 for money laundering. Released on bail.",
-      "organizations": [
-        "Global Finance Hub",
-        "Shadow Shell Corp"
-      ],
+      "history": "Arrested with burner phones linked to dark web trafficking.",
+      "organizations": ["Black Web Cartel"],
       "timeline": [
-        "2026-08-01: Flagged in suspicious transactions",
-        "2026-08-15: Linked to Black Web"
+        "2026-08-14: Arrested at Sector 12 Warehouse"
       ]
     }
   },
   {
     "id": "P-002",
-    "caseId": "NCRB-2026-001",
+    "caseId": "C-002",
     "name": "Vikram Singh",
     "alias": "Boss",
-    "riskLevel": "HIGH",
-    "riskScore": 94,
-    "role": "Leader",
-    "knownAssociates": 8,
-    "locations": 5,
+    "riskLevel": "CRITICAL",
+    "riskScore": 95,
+    "role": "Financier",
+    "knownAssociates": 4,
+    "locations": 3,
     "incidents": 4,
-    "status": "SURVEILLANCE",
+    "status": "AT LARGE",
     "photo": "https://i.pravatar.cc/150?u=vikram",
     "details": {
-      "history": "Multiple convictions for extortion.",
-      "organizations": [
-        "The Singh Cartel"
-      ],
+      "history": "EOW suspect running hawala operations and Ghost Shell Co.",
+      "organizations": ["Ghost Shell Co"],
       "timeline": [
-        "2026-07-22: Seen at warehouse",
-        "2026-08-10: Meeting with Neha Gupta"
+        "2026-08-20: Bulk UPI transfers detected"
       ]
     }
   },
   {
     "id": "P-003",
-    "caseId": "NCRB-2026-002",
-    "name": "Rahul Verma",
-    "alias": "Ghost",
+    "caseId": "C-003",
+    "name": "Rajan",
+    "alias": "Raj",
     "riskLevel": "HIGH",
-    "riskScore": 88,
-    "role": "Hacker",
+    "riskScore": 75,
+    "role": "Fleet Operator",
     "knownAssociates": 2,
-    "locations": 1,
-    "incidents": 5,
-    "status": "UNKNOWN",
-    "photo": "https://i.pravatar.cc/150?u=rahul",
+    "locations": 2,
+    "incidents": 2,
+    "status": "SURVEILLANCE",
+    "photo": "https://i.pravatar.cc/150?u=rajan",
     "details": {
-      "history": "Wanted for cyber terrorism.",
-      "organizations": [
-        "Ghost Sec"
-      ],
+      "history": "Owns fleet of vehicles used in border smuggling.",
+      "organizations": ["Rajan Transport"],
       "timeline": [
-        "2026-08-20: Network breach at City Bank"
+        "2026-08-21: Vehicle RJ-14-XYZ crossed border"
       ]
     }
   }

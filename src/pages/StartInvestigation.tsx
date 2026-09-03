@@ -1,7 +1,7 @@
 import { PageTransition } from '../components/PageTransition';
 import Sidebar from '../components/Sidebar';
 import { useState } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import cases from '../mockData/cases.json';
 
 const StartInvestigation = () => {

@@ -21,3 +21,51 @@ class ExtractionResponse(BaseModel):
     record_count: int
     entity_count: int
     entities: List[EntityMention]
+from enum import Enum
+
+class EntityTypeEnum(str, Enum):
+    PERSON = "PERSON"
+    PHONE = "PHONE"
+    EMAIL = "EMAIL"
+    VEHICLE = "VEHICLE"
+    LOCATION = "LOCATION"
+    ORGANIZATION = "ORGANIZATION"
+    UPI = "UPI"
+    ACCOUNT = "ACCOUNT"
+    CASE = "CASE"
+    DATE = "DATE"
+
+class RelationshipTypeEnum(str, Enum):
+    USES = "USES"
+    OWNS = "OWNS"
+    COMMUNICATES_WITH = "COMMUNICATES_WITH"
+    LOCATED_AT = "LOCATED_AT"
+    ASSOCIATED_WITH = "ASSOCIATED_WITH"
+    TRANSFERRED_TO = "TRANSFERRED_TO"
+    LINKED_TO = "LINKED_TO"
+
+class ExtractedEntity(BaseModel):
+    mention: str
+    type: EntityTypeEnum
+
+class EntityExtractionRequest(BaseModel):
+    case_id: str
+    text: str
+
+class EntityExtractionResponse(BaseModel):
+    case_id: str
+    entities: List[ExtractedEntity]
+
+class ExtractedRelationship(BaseModel):
+    source_mention: str
+    relationship_type: RelationshipTypeEnum
+    target_mention: str
+    evidence_text: str
+
+class RelationshipExtractionRequest(BaseModel):
+    case_id: str
+    text: str
+
+class RelationshipExtractionResponse(BaseModel):
+    case_id: str
+    relationships: List[ExtractedRelationship]

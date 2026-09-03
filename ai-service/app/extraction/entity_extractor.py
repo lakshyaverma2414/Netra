@@ -1,4 +1,5 @@
 ﻿import uuid
+import hashlib
 from typing import List
 from app.schemas.ingestion import NormalizedRecord
 from app.schemas.extraction import EntityMention
@@ -10,7 +11,11 @@ def extract_entities_from_record(record: NormalizedRecord) -> List[EntityMention
     
     def add_mention(etype, text, norm_val, method, start=None, end=None):
         if text:
+            # Deterministic mention_id based on record_id, text and position
+            base_str = f"{record.record_id}_{text}_{start}_{end}".encode('utf-8')
+            m_id = f"M-{hashlib.md5(base_str).hexdigest()[:8]}"
             mentions.append(EntityMention(
+                mention_id=m_id,
                 record_id=record.record_id,
                 entity_type=etype,
                 text=str(text),

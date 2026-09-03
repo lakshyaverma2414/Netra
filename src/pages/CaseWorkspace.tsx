@@ -4,7 +4,19 @@ import Sidebar from '../components/Sidebar';
 import cases from '../mockData/cases.json';
 
 const CaseWorkspace = () => {
+    
     const { caseId } = useParams();
+    const caseExists = cases.some(c => c.id === caseId);
+    if (caseId && !caseExists) {
+        return <div className="h-screen flex items-center justify-center bg-surface text-on-surface">
+            <div className="text-center">
+                <h1 className="text-4xl text-error font-bold">404</h1>
+                <p className="mt-2 text-on-surface-variant">Case Not Found</p>
+                <a href="/dashboard" className="mt-4 block text-primary hover:underline">Return to Dashboard</a>
+            </div>
+        </div>;
+    }
+
     const caseData = cases.find(c => c.id === caseId) || cases[0];
 
     return (

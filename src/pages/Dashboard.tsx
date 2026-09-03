@@ -1,4 +1,4 @@
-import { useNavigate, NavLink, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts';
 import sampleGraph from '../mockData/sampleGraph.json';
 import Chatbot from '../components/Chatbot';
@@ -13,7 +13,7 @@ const Dashboard = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const [searchResult, setSearchResult] = useState<any>(null);
     const [searchStatus, setSearchStatus] = useState<'idle' | 'empty' | 'not-found' | 'found'>('idle');
-    const navigate = useNavigate();
+    
 
     const handleSearch = () => {
         try {

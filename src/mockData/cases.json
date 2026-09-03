@@ -1,6 +1,6 @@
-[
+﻿[
     {
-        "id": "NCRB-2026-001",
+        "id": "C-001",
         "title": "Operation Black Web",
         "status": "ACTIVE",
         "risk": "CRITICAL",
@@ -22,7 +22,7 @@
         "creationDate": "2026-08-15"
     },
     {
-        "id": "NCRB-2026-002",
+        "id": "C-002",
         "title": "Syndicate Ghost",
         "status": "ACTIVE",
         "risk": "HIGH",
@@ -44,59 +44,25 @@
         "creationDate": "2026-08-20"
     },
     {
-        "id": "NCRB-2026-003",
-        "title": "Border Smuggling Route",
-        "status": "CLOSED",
-        "risk": "LOW",
+        "id": "C-003",
+        "title": "Border Route",
+        "status": "ACTIVE",
+        "risk": "MEDIUM",
         "entities": {
             "persons": 12,
             "organizations": 2,
             "vehicles": 8,
             "locations": 4
         },
-        "investigationProgress": 100,
+        "investigationProgress": 30,
         "tasks": {
-            "completed": 20,
+            "completed": 5,
             "total": 20
         },
         "evidence": 56,
-        "leads": 0,
-        "assignedOfficer": "ACP Sharma",
-        "lastActivity": "2026-07-10",
-        "creationDate": "2026-02-12",
-        "finalPerpetrator": "Rajesh Kumar",
-        "keyFindings": "Interstate smuggling ring dismantled. Contraband seized at border checkpost."
-    },
-    {
-        "crimeType": "Organized Crime",
-        "id": "CASE-2026-001",
-        "lastActivity": "Today, 10:00 AM",
         "leads": 3,
-        "title": "Operation Shadow",
-        "location": "Mumbai",
-        "tasks": {
-            "total": 10,
-            "completed": 2
-        },
-        "description": "Suspected syndicate operation.",
-        "evidence": 5,
-        "creationDate": "2026-09-01",
-        "assignedOfficer": "Inspector Vikram",
-        "investigationProgress": 20,
-        "risk": "HIGH",
-        "finalResult": "Investigation Ongoing",
-        "dateOfIncident": "2026-08-15",
-        "status": "ACTIVE",
-        "initialSuspect": {
-            "name": "Ajay",
-            "phone": "9876543210",
-            "address": "Mumbai"
-        },
-        "entities": {
-            "vehicles": 0,
-            "persons": 3,
-            "locations": 2,
-            "organizations": 1
-        }
+        "assignedOfficer": "ACP Sharma",
+        "lastActivity": "Today, 10:10 AM",
+        "creationDate": "2026-02-12"
     }
 ]

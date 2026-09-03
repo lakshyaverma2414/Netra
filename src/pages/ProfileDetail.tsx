@@ -1,10 +1,23 @@
+import cases from '../mockData/cases.json';
 import { useParams, NavLink } from 'react-router-dom';
 import { PageTransition } from '../components/PageTransition';
 import Sidebar from '../components/Sidebar';
 import profiles from '../mockData/profiles.json';
 
 const ProfileDetail = () => {
-    const { caseId, profileId } = useParams();
+    
+const { caseId, profileId } = useParams();
+const caseExists = cases.some(c => c.id === caseId);
+if (caseId && !caseExists) {
+    return <div className="h-screen flex items-center justify-center bg-surface text-on-surface">
+        <div className="text-center">
+            <h1 className="text-4xl text-error font-bold">404</h1>
+            <p className="mt-2 text-on-surface-variant">Case Not Found</p>
+            <a href="/dashboard" className="mt-4 block text-primary hover:underline">Return to Dashboard</a>
+        </div>
+    </div>;
+}
+
     const profile = profiles.find(p => p.id === profileId) || profiles[0];
 
     return (
