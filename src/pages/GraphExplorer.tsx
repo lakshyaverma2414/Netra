@@ -5,7 +5,7 @@ import CytoscapeComponent from 'react-cytoscapejs';
 import Chatbot from '../components/Chatbot';
 import { PageTransition } from '../components/PageTransition';
 import { useParams } from 'react-router-dom';
-import { getInvestigationGraph, getInvestigationAnalytics } from '../api/graph';
+import { getInvestigationGraph, getInvestigationAnalytics, submitFindingFeedback } from '../api/graph';
 
 const INITIAL_ENTITIES: Record<string, string> = {
     "C-001": "P-001",
@@ -35,6 +35,31 @@ const GraphExplorer = () => {
     const [analytics, setAnalytics] = useState<any>(null);
     const cyRef = useRef<any>(null);
     const [isLoading, setIsLoading] = useState(true);
+
+    const [submittingFeedback, setSubmittingFeedback] = useState(false);
+
+    const handleFeedback = async (decision: string) => {
+        if (!selectedLead) { alert("No lead selected"); return; }
+        if (!selectedLead.finding_id) { alert("No finding_id in lead: " + JSON.stringify(selectedLead)); return; }
+        setSubmittingFeedback(true);
+        try {
+            await submitFindingFeedback(selectedLead.finding_id, decision, 'Investigator review via Explorer');
+            setSelectedLead({ ...selectedLead, status: decision });
+            // Update in the main list too
+            if (analytics && analytics.leads) {
+                const updatedLeads = analytics.leads.map((l: any) => 
+                    l.finding_id === selectedLead.finding_id ? { ...l, status: decision } : l
+                );
+                setAnalytics({ ...analytics, leads: updatedLeads });
+            }
+        } catch (e: any) {
+            console.error(e);
+            alert("Failed to submit feedback: " + e.message);
+        } finally {
+            setSubmittingFeedback(false);
+        }
+    };
+
 
     const defaultEntityId = (caseId && INITIAL_ENTITIES[caseId]) || "P-001";
     const [entityId, setEntityId] = useState(defaultEntityId);
@@ -207,7 +232,7 @@ const GraphExplorer = () => {
               </div>
             </header>
 
-            <div className="flex-1 flex overflow-hidden">
+            <div className="flex-1 flex overflow-hidden relative">
                 <aside className="w-80 bg-surface-container-lowest border-r border-outline-variant flex flex-col shrink-0">
                     <div className="p-4 border-b border-outline-variant">
                         <div className="flex flex-col gap-2">
@@ -282,29 +307,64 @@ const GraphExplorer = () => {
                                 {analytics.leads && analytics.leads.length > 0 ? (
                                     <div className="space-y-3">
                                         {analytics.leads.map((lead: any, idx: number) => {
-                                            const isSelected = selectedLead?.lead_id === lead.lead_id;
+                                            const isSelected = selectedLead != null && selectedLead.finding_id === lead.finding_id;
                                             return (
                                                 <div 
                                                     key={idx} 
-                                                    onClick={() => setSelectedLead(isSelected ? null : lead)}
-                                                    className={`p-3 rounded border cursor-pointer transition-colors ${
+                                                    className={`p-3 rounded border transition-colors ${
                                                         isSelected 
-                                                        ? 'bg-primary-container border-primary text-on-primary-container shadow-sm' 
-                                                        : 'bg-surface-container-low border-outline-variant hover:bg-surface-container'
+                                                        ? 'bg-primary-container border-primary text-on-primary-container shadow-sm cursor-default' 
+                                                        : 'bg-surface-container-low border-outline-variant hover:bg-surface-container cursor-pointer'
                                                     }`}
+                                                    onClick={() => !isSelected && setSelectedLead(lead)}
                                                 >
                                                     <div className="flex items-start gap-2">
-                                                        <span className="material-symbols-outlined text-sm mt-0.5 text-primary">search</span>
-                                                        <div>
+                                                        <span className="material-symbols-outlined text-sm mt-0.5 text-primary">
+                                                            {lead.status === 'CONFIRM' ? 'check_circle' : lead.status === 'REJECT' ? 'cancel' : lead.status === 'NEEDS_REVIEW' ? 'help' : 'search'}
+                                                        </span>
+                                                        <div className="flex-1">
                                                             <h4 className="font-bold text-sm leading-tight mb-1">{lead.title}</h4>
-                                                            <p className="text-xs opacity-90">{lead.description}</p>
+                                                            {!isSelected && <p className="text-xs opacity-90 line-clamp-2">{lead.description}</p>}
                                                             <div className="mt-2 flex gap-2">
                                                                 <span className={`text-[10px] uppercase font-bold px-1.5 py-0.5 rounded ${
                                                                     lead.priority === 'HIGH' ? 'bg-error text-white' : 'bg-saffron-accent text-white'
                                                                 }`}>
-                                                                    {lead.priority} Priority
+                                                                    {lead.priority}
                                                                 </span>
+                                                                {lead.status && lead.status !== 'NEW' && (
+                                                                    <span className="text-[10px] uppercase font-bold px-1.5 py-0.5 rounded bg-surface-container-high text-on-surface">
+                                                                        {lead.status}
+                                                                    </span>
+                                                                )}
                                                             </div>
+                                                            
+                                                            {isSelected && (
+                                                                <div className="mt-4 pt-3 border-t border-outline-variant/30 space-y-4">
+                                                                    <div>
+                                                                        <span className="text-[10px] font-bold uppercase tracking-wider opacity-80">Why detected?</span>
+                                                                        <p className="text-xs mt-1">{lead.description}</p>
+                                                                    </div>
+                                                                    
+                                                                    <div>
+                                                                        <span className="text-[10px] font-bold uppercase tracking-wider opacity-80">Traceability</span>
+                                                                        <div className="text-[10px] mt-1 space-y-1 font-mono opacity-90">
+                                                                            <p>Relationships: {(lead.relationship_ids || []).join(', ') || 'None'}</p>
+                                                                            <p>Entities: {(lead.entity_ids || []).join(', ') || 'None'}</p>
+                                                                            <p>Source Records: {(lead.source_record_ids || []).join(', ') || 'None'}</p>
+                                                                            <p className="opacity-50 mt-1">Provenance: {lead.generated_by} (v{lead.algorithm_version})</p>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div className="pt-2">
+                                                                        <span className="text-[10px] font-bold uppercase tracking-wider opacity-80 mb-2 block">Investigator Review</span>
+                                                                        <div className="flex gap-2">
+                                                                            <button disabled={submittingFeedback} onClick={(e) => { e.stopPropagation(); handleFeedback('CONFIRM'); }} className="flex-1 py-1 px-2 bg-[#16a34a] hover:bg-[#15803d] text-white text-[10px] font-bold rounded shadow-sm">CONFIRM</button>
+                                                                            <button disabled={submittingFeedback} onClick={(e) => { e.stopPropagation(); handleFeedback('REJECT'); }} className="flex-1 py-1 px-2 bg-[#dc2626] hover:bg-[#b91c1c] text-white text-[10px] font-bold rounded shadow-sm">REJECT</button>
+                                                                            <button disabled={submittingFeedback} onClick={(e) => { e.stopPropagation(); handleFeedback('NEEDS_REVIEW'); }} className="flex-1 py-1 px-2 bg-surface-container-high hover:bg-surface-container-highest text-on-surface text-[10px] font-bold rounded shadow-sm border border-outline-variant">REVIEW</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            )}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -369,7 +429,7 @@ const GraphExplorer = () => {
 
                 {/* Right Details Panel */}
                 {(selectedNode || selectedEdge) ? (
-                    <aside className="w-80 bg-surface-container-lowest border-l border-outline-variant flex flex-col shrink-0 overflow-y-auto z-10 shadow-[-4px_0_15px_rgba(0,0,0,0.05)]">
+                    <aside className="absolute right-0 top-0 bottom-0 w-80 max-w-[90vw] bg-surface-container-lowest border-l border-outline-variant flex flex-col overflow-y-auto z-20 shadow-[-8px_0_20px_rgba(0,0,0,0.1)]">
                         {selectedNode && (
                             <>
                             <div className="p-4 border-b border-outline-variant bg-primary-container text-on-primary-container flex justify-between items-center shrink-0">
@@ -480,7 +540,7 @@ const GraphExplorer = () => {
                     </aside>
                 ) : null}
             </div>
-            <Chatbot />
+            <Chatbot caseId={caseId} />
         </div>
         </PageTransition>
     );

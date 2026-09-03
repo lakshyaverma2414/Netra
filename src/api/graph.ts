@@ -30,3 +30,19 @@ export const getInvestigationAnalytics = async (caseId: string) => {
     }
     return await response.json();
 };
+
+export const submitFindingFeedback = async (findingId: string, decision: string, reason: string) => {
+    const url = `/api/v1/findings/${encodeURIComponent(findingId)}/feedback`;
+    const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ decision, reason })
+    });
+    
+    if (!response.ok) {
+        throw new Error("Unable to submit feedback.");
+    }
+    return await response.json();
+};

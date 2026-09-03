@@ -8,6 +8,8 @@ from app.api.validation import router as validation_router
 # from app.api.relationships import router as relationships_router
 from app.api.graph import router as graph_router
 from app.api.analytics import router as analytics_router
+from app.api.findings import router as findings_router
+from app.api.investigations import router as investigations_router
 from app.api.cases import router as cases_router
 from app.api.entities import router as entities_router
 
@@ -35,3 +37,5 @@ app.include_router(validation_router, prefix="/api/v1/validation")
 # app.include_router(relationships_router, prefix="/api/v1/relationships")
 app.include_router(graph_router, prefix="/api/v1/graph")
 app.include_router(analytics_router, prefix="/api/v1/analytics")
+app.include_router(findings_router, prefix="/api/v1")
+app.include_router(investigations_router, prefix="/api/v1/investigations")

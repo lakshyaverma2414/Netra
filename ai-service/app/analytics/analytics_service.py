@@ -154,6 +154,17 @@ class AnalyticsService:
             case_nodes = [eid for eid, cids in entity_cases.items() if case_id in cids]
             metrics = {k: v for k, v in metrics.items() if k in case_nodes}
 
+        # Auto-persist generated leads as findings (Step 10.9)
+        from app.services.findings_service import FindingsService
+        f_svc = FindingsService(self.db)
+        persisted_findings = []
+        for lead in leads:
+            f = f_svc.generate_finding_from_lead(lead, case_id=case_id)
+            # Re-fetch the detailed finding to get the full traceability structure
+            detail = f_svc.get_finding_detail(str(f.finding_id))
+            if detail:
+                persisted_findings.append(detail)
+
         # Format output
         metric_list = [{"entity_id": k, **v} for k, v in metrics.items()]
         
@@ -162,7 +173,7 @@ class AnalyticsService:
             "entities_analyzed": len(metrics),
             "metrics": metric_list,
             "patterns": patterns,
-            "leads": leads
+            "leads": persisted_findings
         }
 
     def find_multi_hop_path(self, source_entity_id: str, target_entity_id: str, max_depth: int = 5) -> Dict[str, Any]:

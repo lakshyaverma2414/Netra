@@ -327,3 +327,30 @@ class EvidenceCustodyLog(Base):
     resulting_hash = Column(String(64))
     metadata_json = Column('metadata', JSONB)
 
+class FindingEntity(Base):
+    __tablename__ = 'finding_entities'
+    finding_id = Column(UUID(as_uuid=True), ForeignKey('findings.finding_id'), primary_key=True)
+    entity_id = Column(String(100), ForeignKey('entities.entity_id'), primary_key=True)
+
+class FindingRelationship(Base):
+    __tablename__ = 'finding_relationships'
+    finding_id = Column(UUID(as_uuid=True), ForeignKey('findings.finding_id'), primary_key=True)
+    relationship_id = Column(String(100), ForeignKey('relationships.relationship_id'), primary_key=True)
+
+class FindingDocument(Base):
+    __tablename__ = 'finding_documents'
+    finding_id = Column(UUID(as_uuid=True), ForeignKey('findings.finding_id'), primary_key=True)
+    document_id = Column(UUID(as_uuid=True), ForeignKey('documents.document_id'), primary_key=True)
+
+class InvestigatorFeedback(Base):
+    __tablename__ = 'investigator_feedback'
+    __table_args__ = {'extend_existing': True}
+    feedback_id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    relationship_id = Column(String(100), ForeignKey('relationships.relationship_id'), nullable=True)
+    finding_id = Column(UUID(as_uuid=True), ForeignKey('findings.finding_id'), nullable=True)
+    investigator_id = Column(UUID(as_uuid=True), ForeignKey('users.user_id'))
+    decision = Column(String(50), nullable=False) # CONFIRM, REJECT, NEEDS_REVIEW
+    reason = Column(Text)
+    comments = Column(Text)
+    model_involved = Column(String(100))
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
