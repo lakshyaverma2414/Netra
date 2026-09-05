@@ -7,22 +7,17 @@ public class CaseLinkResponse {
     private String sourceCaseId;
     private String targetCaseId;
     private String linkType;
-    private LocalDateTime createdAt;
-
     public CaseLinkResponse() {
     }
 
     public CaseLinkResponse(
             String sourceCaseId,
             String targetCaseId,
-            String linkType,
-            LocalDateTime createdAt
-    ) {
+            String linkType) {
         this.sourceCaseId = sourceCaseId;
         this.targetCaseId = targetCaseId;
         this.linkType = linkType;
-        this.createdAt = createdAt;
-    }
+        }
 
     public String getSourceCaseId() {
         return sourceCaseId;
@@ -36,7 +31,4 @@ public class CaseLinkResponse {
         return linkType;
     }
 
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
     }
-}

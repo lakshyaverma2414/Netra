@@ -1,5 +1,5 @@
 from app.config import config
-﻿from typing import Annotated, Literal
+from typing import Annotated, Literal
 from langgraph.graph import StateGraph, START, END
 from langgraph.prebuilt import ToolNode
 from langchain_core.messages import SystemMessage, HumanMessage
@@ -9,6 +9,15 @@ from app.agent.tools import get_all_tools
 from app.agent.prompts import SYSTEM_PROMPT
 import json
 import logging
+
+from psycopg_pool import ConnectionPool
+from langgraph.checkpoint.postgres import PostgresSaver
+
+DB_URI = "postgresql://postgres:netra_secure_dev_password@localhost:5433/postgres"
+pool = ConnectionPool(conninfo=DB_URI, max_size=10, kwargs={"autocommit": True})
+checkpointer = PostgresSaver(pool)
+checkpointer.setup()
+
 
 logger = logging.getLogger(__name__)
 
@@ -25,12 +34,12 @@ llm_with_tools = llm.bind_tools(tools)
 
 def interpret_query(state: InvestigationState) -> InvestigationState:
     messages = state.get("messages", [])
+    new_message = HumanMessage(content=f"Case: {state.get('case_id')}\nQuestion: {state.get('question')}")
+    
     if not messages:
-        messages = [
-            SystemMessage(content=SYSTEM_PROMPT),
-            HumanMessage(content=f"Case: {state['case_id']}\nQuestion: {state['question']}")
-        ]
-    return {"messages": messages}
+        return {"messages": [SystemMessage(content=SYSTEM_PROMPT), new_message]}
+    else:
+        return {"messages": [new_message]}
 
 def call_model(state: InvestigationState) -> dict:
     messages = state["messages"]
@@ -38,10 +47,14 @@ def call_model(state: InvestigationState) -> dict:
         response = llm_with_tools.invoke(messages)
         return {"messages": [response]}
     except Exception as e:
-        logger.error(f"LLM Error: {e}")
-        # Return an error message directly if the LLM fails, so we don't crash the graph
+        logger.error(f"LLM Error: {e}", exc_info=True)
+        # Return a safe message — do NOT expose the raw Python exception to the investigator
         from langchain_core.messages import AIMessage
-        return {"messages": [AIMessage(content=f"The investigation could not be completed because the reasoning engine is unavailable: {str(e)}")], "errors": [str(e)]}
+        return {
+            "messages": [AIMessage(content="[UNKNOWN] The reasoning engine is temporarily unavailable. I could not complete this investigation step.")],
+            "errors": ["LLM engine error. Details have been logged."]
+        }
+
 
 def should_continue(state: InvestigationState) -> Literal["tools", "__end__"]:
     messages = state["messages"]
@@ -69,20 +82,28 @@ workflow.add_edge("interpret_query", "agent")
 workflow.add_conditional_edges("agent", should_continue)
 workflow.add_edge("tools", "agent")
 
-app_workflow = workflow.compile()
+app_workflow = workflow.compile(checkpointer=checkpointer)
 
-def run_investigation(case_id: str, question: str, request_id: str) -> dict:
+def run_investigation(case_id: str, question: str, request_id: str, thread_id: str = None) -> dict:
+    if not thread_id:
+        import uuid
+        thread_id = str(uuid.uuid4())
+        
     initial_state = {
         "request_id": request_id,
         "case_id": case_id,
         "question": question,
-        "messages": [],
         "errors": []
+    }
+    
+    config = {
+        "configurable": {"thread_id": thread_id},
+        "recursion_limit": 15
     }
     
     # Run graph with recursion limit
     try:
-        result = app_workflow.invoke(initial_state, {"recursion_limit": 15})
+        result = app_workflow.invoke(initial_state, config)
         final_message = result["messages"][-1].content
         
         # Extract trace metadata (the tool calls made)
@@ -101,14 +122,18 @@ def run_investigation(case_id: str, question: str, request_id: str) -> dict:
                 
         return {
             "request_id": request_id,
+            "thread_id": thread_id,
             "answer": final_message,
             "trace": trace,
             "errors": result.get("errors", [])
         }
     except Exception as e:
+        logger.error("run_investigation fatal error (request_id=%s): %s", request_id, e, exc_info=True)
         return {
             "request_id": request_id,
-            "answer": f"Investigation stopped due to an error: {str(e)}",
+            "thread_id": thread_id,
+            "answer": "The investigation encountered a technical issue. Please try again or contact your system administrator.",
             "trace": [],
-            "errors": [str(e)]
+            "errors": ["A technical error occurred. Details have been logged."]
         }
+

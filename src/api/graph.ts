@@ -1,4 +1,4 @@
-﻿export interface GraphRequestParams {
+export interface GraphRequestParams {
     caseId: string;
     entityId: string;
     depth: number;
@@ -6,7 +6,14 @@
 
 export const getInvestigationGraph = async (params: GraphRequestParams) => {
     const { caseId, entityId, depth } = params;
-    const url = `/api/v1/graph/explore?case_id=${encodeURIComponent(caseId)}&entity_id=${encodeURIComponent(entityId)}&depth=${depth}`;
+    
+    // If no specific entity is provided, load the full case graph
+    let url: string;
+    if (!entityId || entityId.trim() === '') {
+        url = `/api/v1/graph/cases/${encodeURIComponent(caseId)}?depth=${depth}`;
+    } else {
+        url = `/api/v1/graph/explore?case_id=${encodeURIComponent(caseId)}&entity_id=${encodeURIComponent(entityId)}&depth=${depth}`;
+    }
     
     const response = await fetch(url);
     if (!response.ok) {

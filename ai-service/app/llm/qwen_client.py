@@ -1,4 +1,4 @@
-﻿import os
+import os
 import json
 import logging
 import httpx
@@ -7,7 +7,7 @@ from app.schemas.llm_relationship import LLMRelationshipResponse
 
 logger = logging.getLogger(__name__)
 
-QWEN_BASE_URL = os.getenv("QWEN_BASE_URL", "http://localhost:8080")
+QWEN_BASE_URL = os.getenv("QWEN_BASE_URL", "http://127.0.0.1:8081")
 QWEN_TIMEOUT_SECONDS = int(os.getenv("QWEN_TIMEOUT_SECONDS", "120"))
 QWEN_MAX_TOKENS = int(os.getenv("QWEN_MAX_TOKENS", "1024"))
 
@@ -32,13 +32,16 @@ Rules:
 - Every relationship must have supporting evidence_text.
 - Detect explicit negation (negated: true).
 - Preserve temporal and location context when present.
+- Identify the entity type (e.g. PERSON, PHONE, VEHICLE, LOCATION, ORGANIZATION) for source and target.
 - Return ONLY valid JSON matching this schema:
 {{
   "relationships": [
     {{
       "source_text": "text span",
+      "source_type": "PERSON",
       "relationship_type": "USES",
       "target_text": "text span",
+      "target_type": "PHONE",
       "evidence_text": "exact sentence proving this",
       "negated": false,
       "temporal_context": {{"date": "YYYY-MM-DD"}},

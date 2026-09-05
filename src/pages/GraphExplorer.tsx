@@ -1,4 +1,3 @@
-﻿import cases from '../mockData/cases.json';
 import { useState, useEffect, useRef } from 'react';
 
 import CytoscapeComponent from 'react-cytoscapejs';
@@ -7,25 +6,8 @@ import { PageTransition } from '../components/PageTransition';
 import { useParams } from 'react-router-dom';
 import { getInvestigationGraph, getInvestigationAnalytics, submitFindingFeedback } from '../api/graph';
 
-const INITIAL_ENTITIES: Record<string, string> = {
-    "C-001": "P-001",
-    "C-002": "P-002",
-    "C-003": "P-003"
-};
-
 const GraphExplorer = () => {
     const { caseId } = useParams();
-    const caseExists = cases.some(c => c.id === caseId);
-    
-    if (caseId && !caseExists) {
-        return <div className="h-screen flex items-center justify-center bg-surface text-on-surface">
-            <div className="text-center">
-                <h1 className="text-4xl text-error font-bold">404</h1>
-                <p className="mt-2 text-on-surface-variant">Case Not Found</p>
-                <a href="/dashboard" className="mt-4 block text-primary hover:underline">Return to Dashboard</a>
-            </div>
-        </div>;
-    }
 
     const [selectedNode, setSelectedNode] = useState<any>(null);
     const [selectedEdge, setSelectedEdge] = useState<any>(null);
@@ -61,8 +43,7 @@ const GraphExplorer = () => {
     };
 
 
-    const defaultEntityId = (caseId && INITIAL_ENTITIES[caseId]) || "P-001";
-    const [entityId, setEntityId] = useState(defaultEntityId);
+    const [entityId, setEntityId] = useState('');
     const [depth, setDepth] = useState(1);
     const [fetchError, setFetchError] = useState('');
 

@@ -1,4 +1,4 @@
-﻿from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field
 from typing import Optional, List
 import uuid
 from app.schemas.ingestion import NormalizedRecord
@@ -43,6 +43,7 @@ class RelationshipTypeEnum(str, Enum):
     ASSOCIATED_WITH = "ASSOCIATED_WITH"
     TRANSFERRED_TO = "TRANSFERRED_TO"
     LINKED_TO = "LINKED_TO"
+    INVOLVED_IN = "INVOLVED_IN"
 
 class ExtractedEntity(BaseModel):
     mention: str

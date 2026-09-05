@@ -107,8 +107,8 @@ public class CaseLinkService {
         return new CaseLinkResponse(
                 caseLink.getSourceCaseId(),
                 caseLink.getTargetCaseId(),
-                caseLink.getLinkType(),
-                caseLink.getCreatedAt()
+                caseLink.getLinkReason()
+                
         );
     }
 }

@@ -1,9 +1,10 @@
-﻿from fastapi import APIRouter, Depends, Response
+from fastapi import APIRouter, Depends, Response
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
 from sqlalchemy import text
 from app.db.database import get_db
 from app.clients.llama_client import llama_client
+from app.agent.tool_health import run_health_check
 
 router = APIRouter(tags=["health"])
 
@@ -47,3 +48,18 @@ async def health_check(response: Response, db: Session = Depends(get_db)):
         database=db_status,
         graph=graph_status
     )
+
+
+@router.get("/internal/tools/health")
+def tools_health_check(response: Response):
+    """
+    Internal endpoint: probe all 8 investigation tools and report their health.
+
+    Returns HTTP 503 if status is 'critical', HTTP 200 for 'healthy' or
+    'degraded'.  The response body always contains the full per-tool report.
+    """
+    result = run_health_check()
+    if result.get("status") == "critical":
+        response.status_code = 503
+    return result
+

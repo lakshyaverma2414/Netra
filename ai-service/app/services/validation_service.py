@@ -1,4 +1,4 @@
-﻿import uuid
+import uuid
 from typing import List, Tuple, Optional
 from sqlalchemy.orm import Session
 from app.db.models import Entity, Relationship, RelationshipAssertion, ValidationStatus as DBValStatus, ResolutionStatus, RelationshipCase, RelationshipAssertionLink
@@ -36,6 +36,10 @@ ONTOLOGY = {
         "UPI_ID": ["PERSON", "ORGANIZATION"],
         "PHONE": ["PERSON"],
         "VEHICLE": ["PERSON"]
+    },
+    "INVOLVED_IN": {
+        "PERSON": ["EVENT", "ORGANIZATION", "LOCATION"],
+        "ORGANIZATION": ["EVENT"]
     }
 }
 
@@ -83,11 +87,11 @@ def validate_relationship(db: Session, request: ValidationRequest) -> Validation
         return ValidationResponse(request_id=str(uuid.uuid4()), status=ValidationStatusEnum.REJECTED, reasons=reasons)
     reasons.append("VALID_ENTITY_TYPE_PAIR")
     
-    if not request.source_record_id:
+    if not request.source_record_id and not (request.evidence_ids and len(request.evidence_ids) > 0):
         reasons.append("MISSING_PROVENANCE")
         return ValidationResponse(request_id=str(uuid.uuid4()), status=ValidationStatusEnum.CANDIDATE, reasons=reasons)
     
-    reasons.append("SOURCE_RECORD_PRESENT")
+    reasons.append("PROVENANCE_PRESENT")
 
     if request.evidence_ids and len(request.evidence_ids) > 0:
         reasons.append("EVIDENCE_SUPPORTED")

@@ -1,7 +1,14 @@
 import { NavLink, useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 const Sidebar = () => {
     const navigate = useNavigate();
+    const { logout, officer } = useAuth();
+    
+    const handleLogout = () => {
+        logout();
+        navigate("/");
+    };
     
     return (
         <aside className="hidden md:flex flex-col h-screen w-56 bg-surface-container-low border-r border-outline-variant py-4 px-3 sticky top-0 shrink-0 z-20">
@@ -45,8 +52,15 @@ const Sidebar = () => {
             </nav>
             
             {/* User Profile / Settings */}
-            <div className="mt-auto pt-4 border-t border-outline-variant space-y-1">
-                <button onClick={() => navigate('/')} className="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium text-error hover:bg-error-container hover:text-on-error-container transition-colors">
+                        <div className="mt-auto pt-4 border-t border-outline-variant space-y-1">
+                {officer && (
+                    <div className="mb-4 px-3 flex flex-col gap-1">
+                        <span className="text-sm font-bold text-on-surface">{officer.name}</span>
+                        <span className="text-xs text-on-surface-variant font-mono">{officer.officerId}</span>
+                        <span className="text-[10px] bg-primary/10 text-primary px-2 py-0.5 rounded w-fit uppercase font-bold">{officer.role}</span>
+                    </div>
+                )}
+                <button onClick={handleLogout} className="w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium text-error hover:bg-error-container hover:text-on-error-container transition-colors">
                     <span className="material-symbols-outlined text-[20px]">logout</span>
                     Logout
                 </button>

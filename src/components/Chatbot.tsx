@@ -1,4 +1,5 @@
-﻿import { useState } from 'react';
+import { useState } from 'react';
+import { fetchWithAuth } from '../api/apiClient';
 
 interface ChatbotProps {
     caseId?: string;
@@ -11,6 +12,7 @@ const Chatbot = ({ caseId }: ChatbotProps) => {
         { role: 'assistant', text: "Hello Investigator. What would you like to know about this case?" }
     ]);
     const [isLoading, setIsLoading] = useState(false);
+    const [threadId, setThreadId] = useState<string | null>(null);
 
     const handleSend = async () => {
         if (!query.trim()) return;
@@ -21,18 +23,20 @@ const Chatbot = ({ caseId }: ChatbotProps) => {
         setIsLoading(true);
 
         try {
-            const res = await fetch('/api/v1/investigations/query', {
+            const res = await fetchWithAuth('/api/v1/investigations/query', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     case_id: caseId || "GLOBAL",
-                    question: userMsg.text
+                    question: userMsg.text,
+                    thread_id: threadId
                 })
             });
 
             if (!res.ok) throw new Error("Agent failed to respond.");
 
             const data = await res.json();
+            if (data.thread_id && !threadId) setThreadId(data.thread_id);
             setMessages(prev => [...prev, { 
                 role: 'assistant', 
                 text: data.answer,

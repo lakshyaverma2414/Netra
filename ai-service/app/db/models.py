@@ -1,4 +1,4 @@
-﻿from sqlalchemy import Column, String, Text, Boolean, Integer, Float, ForeignKey, DateTime, Enum
+from sqlalchemy import Column, String, Text, Boolean, Integer, Float, ForeignKey, DateTime, Enum
 from sqlalchemy.orm import relationship
 from sqlalchemy.dialects.postgresql import UUID, JSONB
 from sqlalchemy.sql import func
@@ -36,6 +36,26 @@ class ValidationStatus(str, enum.Enum):
     CONFIRMED = 'CONFIRMED'
     NEEDS_REVIEW = 'NEEDS_REVIEW'
     REJECTED = 'REJECTED'
+
+class ProvenanceStatus(str, enum.Enum):
+    VERIFIED = 'VERIFIED'
+    LEGACY = 'LEGACY'
+    MIGRATED = 'MIGRATED'
+
+class IngestionStatus(str, enum.Enum):
+    PENDING = 'PENDING'
+    PROCESSING = 'PROCESSING'
+    COMPLETED = 'COMPLETED'
+    PARTIAL_SUCCESS = 'PARTIAL_SUCCESS'
+    FAILED = 'FAILED'
+
+class RunStatus(str, enum.Enum):
+    RUNNING = 'RUNNING'
+    SUCCESS = 'SUCCESS'
+    FAILED = 'FAILED'
+    NOT_SUPPORTED_YET = 'NOT_SUPPORTED_YET'
+    NEEDS_REVIEW = 'NEEDS_REVIEW'
+
 
 # IDENTITY DOMAIN
 class User(Base):
@@ -88,15 +108,31 @@ class CaseLink(Base):
     link_reason = Column(Text, nullable=False)
 
 # INGESTION DOMAIN
+class SourceSystem(Base):
+    __tablename__ = 'source_systems'
+    system_id = Column(String(50), primary_key=True)
+    name = Column(String(255), nullable=False)
+    agency = Column(String(255))
+    classification = Column(String(50))
+
+class SourceDataset(Base):
+    __tablename__ = 'source_datasets'
+    dataset_id = Column(String(100), primary_key=True)
+    system_id = Column(String(50), ForeignKey('source_systems.system_id'))
+    description = Column(Text)
+
 class IngestionBatch(Base):
     __tablename__ = 'ingestion_batches'
     batch_id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     case_id = Column(String(50), ForeignKey('cases.case_id'))
+    dataset_id = Column(String(100), ForeignKey('source_datasets.dataset_id'))
     submitted_by = Column(UUID(as_uuid=True), ForeignKey('users.user_id'))
     original_filename = Column(String(255), nullable=False)
     file_type = Column(String(50), nullable=False)
     file_hash = Column(String(64), nullable=False)
-    status = Column(String(50), nullable=False)
+    status = Column(Enum(IngestionStatus), nullable=False, default=IngestionStatus.PENDING)
+    records_received = Column(Integer, default=0)
+    records_failed = Column(Integer, default=0)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     completed_at = Column(DateTime(timezone=True))
     error_details = Column(Text)
@@ -110,6 +146,7 @@ class SourceRecord(Base):
     __tablename__ = 'source_records'
     record_id = Column(String(100), primary_key=True)
     batch_id = Column(UUID(as_uuid=True), ForeignKey('ingestion_batches.batch_id'))
+    dataset_id = Column(String(100), ForeignKey('source_datasets.dataset_id'))
     case_id = Column(String(50), ForeignKey('cases.case_id'))
     source_type = Column(String(50), nullable=False)
     external_record_id = Column(String(255))
@@ -117,6 +154,12 @@ class SourceRecord(Base):
     raw_payload = Column(JSONB, nullable=False)
     normalized_payload = Column(JSONB)
     source_hash = Column(String(64))
+    schema_version = Column(String(50))
+    observed_at = Column(DateTime(timezone=True))
+    occurred_at = Column(DateTime(timezone=True))
+    reported_at = Column(DateTime(timezone=True))
+    ingested_at = Column(DateTime(timezone=True), server_default=func.now())
+    processing_status = Column(String(50), default='PENDING')
     created_at = Column(DateTime(timezone=True), server_default=func.now())
 
 class Document(Base):
@@ -153,10 +196,66 @@ class ProcessingRun(Base):
     pipeline_version = Column(String(50), nullable=False)
     model_version = Column(String(50), nullable=False)
     input_batch_id = Column(UUID(as_uuid=True), ForeignKey('ingestion_batches.batch_id'))
-    status = Column(String(50), nullable=False)
+    status = Column(Enum(RunStatus), nullable=False, default=RunStatus.RUNNING)
     started_at = Column(DateTime(timezone=True), server_default=func.now())
     completed_at = Column(DateTime(timezone=True))
     configuration = Column(JSONB)
+
+class DerivedArtifact(Base):
+    __tablename__ = 'derived_artifacts'
+    artifact_id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    evidence_id = Column(String(100), ForeignKey('evidence.evidence_id'))
+    processing_run_id = Column(UUID(as_uuid=True), ForeignKey('processing_runs.run_id'))
+    artifact_type = Column(String(100), nullable=False)
+    storage_uri = Column(String(500), nullable=False)
+    mime_type = Column(String(100))
+    artifact_hash = Column(String(64))
+    hash_algorithm = Column(String(50), default='SHA-256')
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+
+class Observation(Base):
+    __tablename__ = 'observations'
+    observation_id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    source_record_id = Column(String(100), ForeignKey('source_records.record_id'))
+    derived_artifact_id = Column(UUID(as_uuid=True), ForeignKey('derived_artifacts.artifact_id'))
+    processing_run_id = Column(UUID(as_uuid=True), ForeignKey('processing_runs.run_id'))
+    observation_type = Column(String(100), nullable=False)
+    raw_text = Column(Text)
+    normalized_value = Column(String(500))
+    observed_at = Column(DateTime(timezone=True))
+    extraction_confidence = Column(Float)
+
+class Location(Base):
+    __tablename__ = 'locations'
+    location_id = Column(String(100), primary_key=True)
+    name = Column(String(255))
+    address = Column(Text)
+    district = Column(String(100))
+    state = Column(String(100))
+    country = Column(String(100))
+    latitude = Column(Float)
+    longitude = Column(Float)
+    jurisdiction = Column(String(100))
+    location_type = Column(String(50))
+
+class Event(Base):
+    __tablename__ = 'events'
+    event_id = Column(String(100), primary_key=True)
+    case_id = Column(String(50), ForeignKey('cases.case_id'))
+    event_type = Column(String(100), nullable=False)
+    occurred_at = Column(DateTime(timezone=True))
+    observed_at = Column(DateTime(timezone=True))
+    valid_from = Column(DateTime(timezone=True))
+    valid_to = Column(DateTime(timezone=True))
+    location_id = Column(String(100), ForeignKey('locations.location_id'))
+    description = Column(Text)
+    source_record_id = Column(String(100), ForeignKey('source_records.record_id'))
+
+class EventEntity(Base):
+    __tablename__ = 'event_entities'
+    event_id = Column(String(100), ForeignKey('events.event_id'), primary_key=True)
+    entity_id = Column(String(100), ForeignKey('entities.entity_id'), primary_key=True)
+    role = Column(String(100))
 
 # ENTITY DOMAIN
 class Entity(Base):
@@ -182,6 +281,7 @@ class EntityMention(Base):
     extraction_confidence = Column(Float)
     source_record_id = Column(String(100), ForeignKey('source_records.record_id'))
     document_chunk_id = Column(UUID(as_uuid=True), ForeignKey('document_chunks.chunk_id'))
+    observation_id = Column(UUID(as_uuid=True), ForeignKey('observations.observation_id'))
     start_offset = Column(Integer)
     end_offset = Column(Integer)
     extraction_run_id = Column(UUID(as_uuid=True), ForeignKey('processing_runs.run_id'))
@@ -232,6 +332,8 @@ class Relationship(Base):
     confidence = Column(Float)
     first_observed_at = Column(DateTime(timezone=True))
     last_observed_at = Column(DateTime(timezone=True))
+    valid_from = Column(DateTime(timezone=True))
+    valid_to = Column(DateTime(timezone=True))
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     updated_at = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now())
 
@@ -243,12 +345,15 @@ class RelationshipAssertion(Base):
     relationship_type = Column(String(100), nullable=False)
     source_record_id = Column(String(100), ForeignKey('source_records.record_id'))
     document_chunk_id = Column(UUID(as_uuid=True), ForeignKey('document_chunks.chunk_id'))
+    observation_id = Column(UUID(as_uuid=True), ForeignKey('observations.observation_id'))
     evidence_text = Column(Text)
     extraction_method = Column(String(50))
     extraction_confidence = Column(Float)
     negated = Column(Boolean, default=False)
     temporal_context = Column(JSONB)
     location_context = Column(JSONB)
+    valid_from = Column(DateTime(timezone=True))
+    valid_to = Column(DateTime(timezone=True))
     extraction_run_id = Column(UUID(as_uuid=True), ForeignKey('processing_runs.run_id'))
     status = Column(String(50), nullable=False)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
@@ -289,6 +394,8 @@ class Evidence(Base):
     storage_uri = Column(String(500), nullable=False)
     file_hash = Column(String(64), unique=True, nullable=False)
     hash_algorithm = Column(String(50), default='SHA-256')
+    source_record_id = Column(String(100), ForeignKey('source_records.record_id'))
+    provenance_status = Column(Enum(ProvenanceStatus), default=ProvenanceStatus.VERIFIED)
     source = Column(String(255))
     collected_at = Column(DateTime(timezone=True))
     collected_by = Column(UUID(as_uuid=True), ForeignKey('users.user_id'))

@@ -2,14 +2,63 @@ import { useParams, NavLink } from 'react-router-dom';
 import { PageTransition } from '../components/PageTransition';
 import Sidebar from '../components/Sidebar';
 import { ProfileCard } from '../components/ProfileCard';
-import profiles from '../mockData/profiles.json';
-import cases from '../mockData/cases.json';
+import { useState, useEffect } from 'react';
+import { fetchWithAuth } from '../api/apiClient';
 
 const ProfilesList = () => {
-    
     const { caseId } = useParams();
-    const caseExists = cases.some(c => c.id === caseId);
-    if (caseId && !caseExists) {
+    const [caseData, setCaseData] = useState<any>(null);
+    const [caseProfiles, setCaseProfiles] = useState<any[]>([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState('');
+
+    useEffect(() => {
+        const fetchCaseAndProfiles = async () => {
+            if (!caseId) return;
+            try {
+                // Fetch case details from Spring Boot
+                const caseRes = await fetchWithAuth(`/api/cases/${caseId}`);
+                if (!caseRes.ok) {
+                    if (caseRes.status === 404) throw new Error('NOT_FOUND');
+                    throw new Error('Failed to load case');
+                }
+                const caseDataJson = await caseRes.json();
+                setCaseData({ id: caseDataJson.caseId, title: caseDataJson.title });
+
+                // Fetch case entities from Python AI Service
+                const entRes = await fetch(`/api/v1/cases/${caseId}/entities`);
+                if (!entRes.ok) throw new Error('Failed to load profiles');
+                const entities = await entRes.json();
+
+                // Map Python Entities to ProfileCard format
+                const formattedProfiles = entities
+                    .filter((e: any) => e.entity_type === 'PERSON') // Only show people in suspect list
+                    .map((e: any) => ({
+                        id: e.entity_id,
+                        caseId: caseId,
+                        name: e.canonical_name,
+                        alias: 'Unknown',
+                        photo: `https://ui-avatars.com/api/?name=${encodeURIComponent(e.canonical_name)}&background=random`,
+                        riskLevel: 'HIGH', // Default placeholder
+                        riskScore: 75,
+                        role: e.entity_type,
+                        status: 'ACTIVE',
+                        knownAssociates: 0,
+                        incidents: 1
+                    }));
+
+                setCaseProfiles(formattedProfiles);
+            } catch (err: any) {
+                setError(err.message);
+            } finally {
+                setIsLoading(false);
+            }
+        };
+
+        fetchCaseAndProfiles();
+    }, [caseId]);
+
+    if (error === 'NOT_FOUND') {
         return <div className="h-screen flex items-center justify-center bg-surface text-on-surface">
             <div className="text-center">
                 <h1 className="text-4xl text-error font-bold">404</h1>
@@ -18,9 +67,6 @@ const ProfilesList = () => {
             </div>
         </div>;
     }
-
-    const caseData = cases.find(c => c.id === caseId) || cases[0];
-    const caseProfiles = profiles.filter(p => p.caseId === caseId);
 
     return (
         <PageTransition>
@@ -33,23 +79,33 @@ const ProfilesList = () => {
                                 <span className="material-symbols-outlined text-sm">arrow_back</span> Case Selection
                             </NavLink>
                             <span>/</span>
-                            <span>{caseData.id}</span>
+                            <span>{caseData?.id || caseId}</span>
                         </div>
                         <h1 className="text-2xl font-bold text-primary">Suspect Profiles</h1>
-                        <p className="text-sm text-on-surface-variant mt-1">Showing {caseProfiles.length} profiles for {caseData.title}</p>
+                        <p className="text-sm text-on-surface-variant mt-1">
+                            {isLoading ? 'Loading profiles...' : `Showing ${caseProfiles.length} profiles for ${caseData?.title || 'Case'}`}
+                        </p>
                     </div>
 
                     <div className="p-4 md:p-8 max-w-container-max mx-auto w-full">
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-                            {caseProfiles.length > 0 ? (
-                                caseProfiles.map(p => <ProfileCard key={p.id} profile={p} />)
-                            ) : (
-                                <div className="col-span-full py-12 text-center text-on-surface-variant">
-                                    <span className="material-symbols-outlined text-4xl mb-2">person_off</span>
-                                    <p>No criminal profiles have been logged for this case yet.</p>
-                                </div>
-                            )}
-                        </div>
+                        {isLoading ? (
+                            <div className="flex items-center justify-center py-12 gap-2 text-on-surface-variant">
+                                <span className="material-symbols-outlined animate-spin">progress_activity</span> Loading profiles...
+                            </div>
+                        ) : error ? (
+                             <div className="bg-error-container text-on-error-container p-4 rounded text-sm font-bold flex items-center gap-2">
+                                <span className="material-symbols-outlined">error</span> {error}
+                            </div>
+                        ) : caseProfiles.length > 0 ? (
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+                                {caseProfiles.map(p => <ProfileCard key={p.id} profile={p} />)}
+                            </div>
+                        ) : (
+                            <div className="py-12 text-center text-on-surface-variant">
+                                <span className="material-symbols-outlined text-4xl mb-2">person_off</span>
+                                <p>No criminal profiles have been logged for this case yet.</p>
+                            </div>
+                        )}
                     </div>
                 </main>
             </div>

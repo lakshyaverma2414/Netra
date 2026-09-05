@@ -11,7 +11,7 @@ class Config:
     POSTGRES_DB = os.getenv("POSTGRES_DB", "postgres")
     AGE_GRAPH_NAME = os.getenv("AGE_GRAPH_NAME", "crime_network")
     
-    QWEN_BASE_URL = os.getenv("QWEN_BASE_URL", "http://127.0.0.1:8080")
+    QWEN_BASE_URL = os.getenv("QWEN_BASE_URL", "http://127.0.0.1:8081")
     QWEN_MODEL = os.getenv("QWEN_MODEL", "Qwen3-4B-Instruct-2507")
 
 config = Config()

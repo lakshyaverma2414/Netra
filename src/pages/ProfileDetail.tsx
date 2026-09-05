@@ -1,24 +1,75 @@
-import cases from '../mockData/cases.json';
 import { useParams, NavLink } from 'react-router-dom';
 import { PageTransition } from '../components/PageTransition';
 import Sidebar from '../components/Sidebar';
-import profiles from '../mockData/profiles.json';
+import { useState, useEffect } from 'react';
 
 const ProfileDetail = () => {
-    
-const { caseId, profileId } = useParams();
-const caseExists = cases.some(c => c.id === caseId);
-if (caseId && !caseExists) {
-    return <div className="h-screen flex items-center justify-center bg-surface text-on-surface">
-        <div className="text-center">
-            <h1 className="text-4xl text-error font-bold">404</h1>
-            <p className="mt-2 text-on-surface-variant">Case Not Found</p>
-            <a href="/dashboard" className="mt-4 block text-primary hover:underline">Return to Dashboard</a>
-        </div>
-    </div>;
-}
+    const { caseId, profileId } = useParams();
+    const [profile, setProfile] = useState<any>(null);
+    const [isLoading, setIsLoading] = useState(true);
+    const [error, setError] = useState('');
 
-    const profile = profiles.find(p => p.id === profileId) || profiles[0];
+    useEffect(() => {
+        const fetchProfile = async () => {
+            if (!profileId) return;
+            try {
+                const res = await fetch(`/api/v1/entities/${profileId}`);
+                if (!res.ok) {
+                    if (res.status === 404) throw new Error('NOT_FOUND');
+                    throw new Error('Failed to load profile');
+                }
+                const e = await res.json();
+                
+                // Map the basic entity from Python to the rich Profile format expected by UI
+                // Note: The backend currently lacks dossier endpoints (timeline, orgs, history),
+                // so we use placeholders for those specific UI sections for now.
+                setProfile({
+                    id: e.entity_id,
+                    name: e.canonical_name,
+                    alias: 'Unknown',
+                    photo: `https://ui-avatars.com/api/?name=${encodeURIComponent(e.canonical_name)}&background=random`,
+                    riskLevel: 'HIGH',
+                    riskScore: 75,
+                    role: e.entity_type,
+                    status: e.status || 'ACTIVE',
+                    knownAssociates: 0,
+                    locations: 0,
+                    details: {
+                        history: `Canonical entity extracted from case evidence. Currently under investigation in case ${caseId}.`,
+                        organizations: ['Unknown'],
+                        timeline: [
+                            `${new Date().getFullYear()}: Entity identified in evidence pipeline.`
+                        ]
+                    }
+                });
+            } catch (err: any) {
+                setError(err.message);
+            } finally {
+                setIsLoading(false);
+            }
+        };
+        fetchProfile();
+    }, [profileId, caseId]);
+
+    if (error === 'NOT_FOUND') {
+        return <div className="h-screen flex items-center justify-center bg-surface text-on-surface">
+            <div className="text-center">
+                <h1 className="text-4xl text-error font-bold">404</h1>
+                <p className="mt-2 text-on-surface-variant">Profile Not Found</p>
+                <a href={`/cases/${caseId}/profiling`} className="mt-4 block text-primary hover:underline">Return to Suspects</a>
+            </div>
+        </div>;
+    }
+
+    if (isLoading || !profile) {
+        return (
+            <div className="h-screen flex items-center justify-center bg-surface text-on-surface">
+                <div className="flex items-center gap-2 text-on-surface-variant">
+                    <span className="material-symbols-outlined animate-spin">progress_activity</span> Loading profile...
+                </div>
+            </div>
+        );
+    }
 
     return (
         <PageTransition>
@@ -57,7 +108,7 @@ if (caseId && !caseExists) {
                                     <div>
                                         <h3 className="text-xs font-bold text-on-surface-variant uppercase mb-2">Organizations</h3>
                                         <ul className="list-disc pl-4 text-sm">
-                                            {profile.details.organizations.map((org, i) => <li key={i}>{org}</li>)}
+                                            {profile.details.organizations.map((org: string, i: number) => <li key={i}>{org}</li>)}
                                         </ul>
                                     </div>
                                 </div>
@@ -66,7 +117,7 @@ if (caseId && !caseExists) {
                             <div className="bg-surface-container-lowest border border-outline-variant p-6 rounded-xl shadow-sm">
                                 <h2 className="text-lg font-bold text-primary mb-4 border-b border-outline-variant pb-2">Activity Timeline</h2>
                                 <div className="space-y-4">
-                                    {profile.details.timeline.map((event, i) => {
+                                    {profile.details.timeline.map((event: string, i: number) => {
                                         const [date, ...desc] = event.split(': ');
                                         return (
                                             <div key={i} className="flex gap-4">

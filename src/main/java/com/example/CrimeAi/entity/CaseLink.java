@@ -17,11 +17,10 @@ public class CaseLink {
     @Column(name = "target_case_id", nullable = false)
     private String targetCaseId;
 
-    @Column(name = "link_type", nullable = false, length = 100)
-    private String linkType;
+    @Column(name = "link_reason", nullable = false, columnDefinition = "TEXT")
+    private String linkReason;
 
-    @Column(name = "created_at")
-    private LocalDateTime createdAt;
+    
 
     public CaseLink() {
     }
@@ -29,17 +28,14 @@ public class CaseLink {
     public CaseLink(
             String sourceCaseId,
             String targetCaseId,
-            String linkType
+            String linkReason
     ) {
         this.sourceCaseId = sourceCaseId;
         this.targetCaseId = targetCaseId;
-        this.linkType = linkType;
+        this.linkReason = linkReason;
     }
 
-    @PrePersist
-    protected void onCreate() {
-        createdAt = LocalDateTime.now();
-    }
+    
 
     public String getSourceCaseId() {
         return sourceCaseId;
@@ -57,17 +53,15 @@ public class CaseLink {
         this.targetCaseId = targetCaseId;
     }
 
-    public String getLinkType() {
-        return linkType;
+    public String getLinkReason() {
+        return linkReason;
     }
 
-    public void setLinkType(String linkType) {
-        this.linkType = linkType;
+    public void setLinkReason(String linkReason) {
+        this.linkReason = linkReason;
     }
 
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
+    
 
     public static class CaseLinkId implements Serializable {
 

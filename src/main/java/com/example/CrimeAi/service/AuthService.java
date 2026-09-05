@@ -58,7 +58,7 @@ public class AuthService {
         }
 
         // Temporary CAPTCHA validation
-        if (!"7G2X9".equalsIgnoreCase(request.getCaptcha())) {
+        if (!"Q8x2P".equalsIgnoreCase(request.getCaptcha())) {
             return new LoginResponse(
                     false,
                     "Invalid captcha",

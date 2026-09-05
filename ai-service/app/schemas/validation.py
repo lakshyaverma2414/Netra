@@ -1,4 +1,4 @@
-﻿from pydantic import BaseModel
+from pydantic import BaseModel
 from typing import List, Optional
 from enum import Enum
 
@@ -12,7 +12,7 @@ class ValidationRequest(BaseModel):
     source_entity_id: str
     relationship_type: str
     target_entity_id: str
-    source_record_id: str
+    source_record_id: Optional[str] = None
     evidence_ids: Optional[List[str]] = []
     extraction_method: Optional[str] = "Qwen-4B"
     extracted_text: Optional[str] = None

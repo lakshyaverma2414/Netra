@@ -1,4 +1,4 @@
-﻿from pydantic import BaseModel
+from pydantic import BaseModel
 from typing import List, Optional
 from enum import Enum
 from app.schemas.extraction import EntityTypeEnum
@@ -12,7 +12,8 @@ class ResolutionStatusEnum(str, Enum):
 class MentionInput(BaseModel):
     text: str
     entity_type: EntityTypeEnum
-    source_record_id: str
+    source_record_id: Optional[str] = None
+    observation_id: Optional[str] = None
 
 class ResolutionRequest(BaseModel):
     case_id: str

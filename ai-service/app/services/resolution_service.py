@@ -1,4 +1,4 @@
-﻿import uuid
+import uuid
 import difflib
 from sqlalchemy.orm import Session
 from typing import List, Tuple, Optional
@@ -11,8 +11,8 @@ def generate_candidates(db: Session, text: str, norm_val: str, entity_type: str)
     candidates = []
     
     # Tier 1: Exact Identifiers
-    db_type = "UPI_ID" if entity_type == "UPI" else entity_type
-    if db_type in ["PHONE", "UPI_ID", "VEHICLE", "CASE", "ACCOUNT", "EMAIL"]:
+    db_type = "UPI_ID" if entity_type == "UPI" else ("BANK_ACCOUNT" if entity_type == "ACCOUNT" else entity_type)
+    if db_type in ["PHONE", "UPI_ID", "VEHICLE", "CASE", "BANK_ACCOUNT", "EMAIL"]:
         exact_ents = db.query(Entity).filter(Entity.entity_type == db_type).all()
         for e in exact_ents:
             if normalize_text(e.canonical_name, entity_type) == norm_val:
@@ -77,6 +77,27 @@ def resolve_mentions(db: Session, request: ResolutionRequest) -> ResolutionRespo
         candidates = generate_candidates(db, m.text, norm_val, m.entity_type.value)
         status, matched_ent, score, methods = determine_status(candidates)
         
+        db_type = "UPI_ID" if m.entity_type.name == "UPI" else ("BANK_ACCOUNT" if m.entity_type.name == "ACCOUNT" else m.entity_type.name)
+
+        # AUTO-CREATE IF REJECTED
+        if status == ResolutionStatusEnum.REJECTED or not matched_ent:
+            new_ent = Entity(
+                entity_id=f"E-{uuid.uuid4().hex[:8]}",
+                entity_type=db_type,
+                canonical_name=m.text,
+                normalized_value=norm_val,
+                resolution_status="CONFIRMED",
+                resolution_score=1.0
+            )
+            db.add(new_ent)
+            db.flush() # Make it queryable for the next mention in the loop
+            
+            matched_ent = new_ent
+            status = ResolutionStatusEnum.CONFIRMED
+            score = 1.0
+            methods = ["auto_created_from_mention"]
+            candidates = [(new_ent, score, methods)] # Update candidates for the log
+
         db_status = DBResStatus.REJECTED
         if status == ResolutionStatusEnum.CONFIRMED:
             db_status = DBResStatus.CONFIRMED
@@ -88,11 +109,13 @@ def resolve_mentions(db: Session, request: ResolutionRequest) -> ResolutionRespo
         # Write Mention
         db_mention = EntityMention(
             mention_id=mention_id,
-            entity_type="UPI_ID" if m.entity_type.name == "UPI" else m.entity_type.name,
+            entity_type=db_type,
             extracted_text=m.text,
             normalized_value=norm_val,
-            extraction_method="Qwen-4B",
+            extraction_method="Orchestrator",
+            extraction_confidence=score,
             source_record_id=m.source_record_id,
+            observation_id=m.observation_id,
             resolved_entity_id=matched_ent.entity_id if matched_ent and status == ResolutionStatusEnum.CONFIRMED else None
         )
         db.add(db_mention)
@@ -116,6 +139,7 @@ def resolve_mentions(db: Session, request: ResolutionRequest) -> ResolutionRespo
                 existing_ce = db.query(CaseEntity).filter_by(case_id=request.case_id, entity_id=matched_ent.entity_id).first()
                 if not existing_ce:
                     db.add(CaseEntity(case_id=request.case_id, entity_id=matched_ent.entity_id, association_type="RESOLVED_MENTION"))
+                    db.flush()
         
         results.append(ResolutionResultItem(
             mention=m.text,

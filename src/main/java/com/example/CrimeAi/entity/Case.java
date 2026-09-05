@@ -21,7 +21,7 @@ public class Case {
     private String status = "OPEN";
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "assigned_to")
+    @JoinColumn(name = "created_by")
     private User assignedTo;
 
     @Column(name = "created_at")
