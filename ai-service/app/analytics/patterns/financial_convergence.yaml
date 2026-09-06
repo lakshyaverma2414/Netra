@@ -1,0 +1,11 @@
+pattern:
+  description: Identify entities receiving funds from multiple distinct originators.
+  id: financial_convergence
+  parameters:
+    minimum_sources: 2
+  query_template: "\n    SELECT ee_target.entity_id as focal_entity, COUNT(DISTINCT\
+    \ ee_source.entity_id) as incoming_count\n    FROM events e\n    JOIN event_entities\
+    \ ee_target ON e.event_id = ee_target.event_id AND ee_target.role = 'beneficiary'\n\
+    \    JOIN event_entities ee_source ON e.event_id = ee_source.event_id AND ee_source.role\
+    \ = 'originator'\n    WHERE e.event_type = 'netra:FinancialTransaction'\n    GROUP\
+    \ BY ee_target.entity_id\n    HAVING COUNT(DISTINCT ee_source.entity_id) >= :minimum_sources\n"

@@ -1,0 +1,27 @@
+Entity:
+  Actor:
+    Person:
+      description: "A human being, known or unknown."
+    Organization:
+      description: "A formal entity (company, agency)."
+    Group:
+      description: "An informal collective (syndicate, gang)."
+  DigitalObject:
+    Account:
+      description: "A logical account (Bank, Crypto, Social Media)."
+    Identifier:
+      description: "A digital routing point (Email, Phone Number, IP, MAC)."
+    Device:
+      description: "A physical computing device (Mobile, Laptop)."
+  PhysicalObject:
+    Vehicle:
+      description: "A mode of transport."
+    Weapon:
+      description: "An instrument used in an event."
+    Asset:
+      description: "Property, real estate, valuables."
+  Location:
+    PhysicalLocation:
+      description: "Geo-coordinate, Address, Region."
+    DigitalLocation:
+      description: "URL, Domain, Darkweb forum."

@@ -1,0 +1,93 @@
+netra:Event:
+  label: Event
+  description: A bounded occurrence in time.
+  version: "1.0"
+netra:CommunicationEvent:
+  label: Communication Event
+  parent: netra:Event
+  description: Exchange of information between entities.
+  roles:
+    sender:
+      allowed_types: [netra:Actor, netra:Identifier]
+      required: true
+      cardinality: "1..*"
+    receiver:
+      allowed_types: [netra:Actor, netra:Identifier]
+      required: true
+      cardinality: "1..*"
+    infrastructure:
+      allowed_types: [netra:Device, netra:Identifier]
+      required: false
+      cardinality: "0..*"
+netra:FinancialTransaction:
+  label: Financial Transaction
+  parent: netra:Event
+  description: Movement of financial value.
+  roles:
+    originator:
+      allowed_types: [netra:Actor, netra:Account]
+      required: true
+      cardinality: "1"
+    beneficiary:
+      allowed_types: [netra:Actor, netra:Account]
+      required: true
+      cardinality: "1"
+    facilitator:
+      allowed_types: [netra:Organization]
+      required: false
+      cardinality: "0..*"
+netra:PhysicalMovement:
+  label: Physical Movement
+  parent: netra:Event
+  description: Relocation of an entity.
+  roles:
+    mover:
+      allowed_types: [netra:Actor, netra:PhysicalObject]
+      required: true
+      cardinality: "1..*"
+    origin:
+      allowed_types: [netra:Location]
+      required: false
+      cardinality: "0..1"
+    destination:
+      allowed_types: [netra:Location]
+      required: true
+      cardinality: "1"
+netra:CyberAction:
+  label: Cyber Action
+  parent: netra:Event
+  description: Interaction with infrastructure.
+  roles:
+    actor:
+      allowed_types: [netra:Actor, netra:DigitalIdentity]
+      required: true
+      cardinality: "1..*"
+    target:
+      allowed_types: [netra:DigitalObject]
+      required: true
+      cardinality: "1..*"
+    vector:
+      allowed_types: [netra:DigitalObject]
+      required: false
+      cardinality: "0..*"
+netra:CriminalIncident:
+  label: Criminal Incident
+  parent: netra:Event
+  description: The core crime event.
+  roles:
+    perpetrator:
+      allowed_types: [netra:Actor]
+      required: false
+      cardinality: "0..*"
+    victim:
+      allowed_types: [netra:Actor, netra:Organization]
+      required: false
+      cardinality: "0..*"
+    target_object:
+      allowed_types: [netra:Entity]
+      required: false
+      cardinality: "0..*"
+    location:
+      allowed_types: [netra:Location]
+      required: false
+      cardinality: "0..*"

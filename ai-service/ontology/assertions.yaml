@@ -1,0 +1,19 @@
+netra:AssertionStatus:
+  label: Assertion Status
+  description: The lifecycle state of a semantic claim.
+  options:
+    CANDIDATE: "Extracted, pending semantic and evidence validation."
+    NEEDS_REVIEW: "Semantically valid but ambiguous or lacks sufficient evidence."
+    CONFIRMED: "Semantically valid and fully supported by provenance."
+    REJECTED: "Contradicted, disproven, or semantically invalid."
+netra:Assertion:
+  label: Assertion
+  description: A first-class claim object combining semantics with provenance.
+  required_fields:
+    - subject_id
+    - predicate_id
+    - object_id
+    - extraction_agent
+    - extraction_confidence
+    - observation_id
+    - status

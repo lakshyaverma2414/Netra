@@ -1,0 +1,3 @@
+metric,status,baseline
+degree_centrality,Trivial due to graph fragmentation,N/A
+cross_case_bridge,Failed,0 cross-case entities exist

@@ -1,0 +1,72 @@
+netra:Entity:
+  label: Entity
+  description: Base domain object.
+  version: "1.0"
+netra:Actor:
+  label: Actor
+  parent: netra:Entity
+  description: An entity capable of action.
+netra:Person:
+  label: Person
+  parent: netra:Actor
+  description: A human being.
+netra:Organization:
+  label: Organization
+  parent: netra:Actor
+  description: A formal group or agency.
+netra:Group:
+  label: Group
+  parent: netra:Actor
+  description: An informal collective or syndicate.
+netra:DigitalObject:
+  label: Digital Object
+  parent: netra:Entity
+  description: Cyber/digital entity.
+netra:Identifier:
+  label: Digital Identifier
+  parent: netra:DigitalObject
+  description: Phone, Email, IP, MAC.
+netra:DigitalIdentity:
+  label: Digital Identity
+  parent: netra:DigitalObject
+  description: Persona or username.
+netra:DigitalAsset:
+  label: Digital Asset
+  parent: netra:DigitalObject
+  description: Crypto, domain name, digital property.
+netra:Account:
+  label: Account
+  parent: netra:DigitalObject
+  description: Bank, Crypto, or Social Media account.
+netra:Device:
+  label: Device
+  parent: netra:DigitalObject
+  description: Mobile, Computer, IoT.
+netra:PhysicalObject:
+  label: Physical Object
+  parent: netra:Entity
+  description: Material entity.
+netra:Vehicle:
+  label: Vehicle
+  parent: netra:PhysicalObject
+  description: Mode of transport.
+netra:Weapon:
+  label: Weapon
+  parent: netra:PhysicalObject
+  description: Instrument for physical harm.
+netra:Document:
+  label: Document
+  parent: netra:PhysicalObject
+  description: Physical paperwork or ID.
+netra:Asset:
+  label: Asset
+  parent: netra:PhysicalObject
+  description: Valuable physical item.
+netra:Property:
+  label: Property
+  parent: netra:PhysicalObject
+  description: Real estate, land, or buildings.
+netra:Location:
+  label: Location
+  parent: netra:Entity
+  description: Physical or Digital place.

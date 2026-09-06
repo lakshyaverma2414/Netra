@@ -1,0 +1,33 @@
+Relationship:
+  Identity:
+    SAME_AS:
+      domain: Entity
+      range: Entity
+      properties: [symmetric, transitive]
+    ALIAS_OF:
+      domain: Actor
+      range: Actor
+  Association:
+    AFFILIATED_WITH:
+      domain: Actor
+      range: [Actor, Organization, Group]
+    KNOWS:
+      domain: Person
+      range: Person
+      properties: [symmetric]
+  OwnershipControl:
+    OWNS:
+      domain: [Person, Organization]
+      range: [Vehicle, Asset, DigitalObject, Organization]
+    CONTROLS:
+      domain: [Person, Organization]
+      range: [Account, Device, Organization]
+  Spatial:
+    LOCATED_AT:
+      domain: [Person, PhysicalObject, Event]
+      range: PhysicalLocation
+  Temporal:
+    PRECEDES:
+      domain: Event
+      range: Event
+      properties: [transitive]

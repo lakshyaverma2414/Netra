@@ -1,0 +1,8 @@
+pattern:
+  description: Find entities linked indirectly across multiple relationships.
+  id: multi_hop_linkage
+  parameters: {}
+  query_template: "\n                SELECT r1.source_entity_id as start_node, r2.target_entity_id\
+    \ as end_node\n                FROM relationships r1\n                JOIN relationships\
+    \ r2 ON r1.target_entity_id = r2.source_entity_id\n                WHERE r1.source_entity_id\
+    \ != r2.target_entity_id\n            "

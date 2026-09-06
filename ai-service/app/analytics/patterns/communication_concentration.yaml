@@ -1,0 +1,10 @@
+pattern:
+  description: Identify entities that have communication from multiple distinct sources.
+  id: communication_concentration
+  parameters:
+    minimum_sources: 3
+  query_template: "\n                SELECT target_entity_id as focal_entity, COUNT(DISTINCT\
+    \ source_entity_id) as incoming_count\n                FROM relationships\n  \
+    \              WHERE relationship_type = 'COMMUNICATES_WITH'\n               \
+    \ GROUP BY target_entity_id\n                HAVING COUNT(DISTINCT source_entity_id)\
+    \ >= :minimum_sources\n            "

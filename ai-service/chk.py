@@ -1,0 +1,5 @@
+﻿from sqlalchemy import create_engine, text
+engine = create_engine("postgresql://postgres:netra_secure_dev_password@localhost:5433/postgres")
+with engine.connect() as conn:
+    res = conn.execute(text("SELECT * FROM source_records LIMIT 0")).keys()
+    print("Cols:", res)

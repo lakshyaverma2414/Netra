@@ -1,0 +1,21 @@
+Event:
+  CommunicationEvent:
+    description: "Exchange of information between identifiers."
+    attributes: [timestamp, duration, channel, direction]
+    participants: [sender, receiver, infrastructure]
+  FinancialTransaction:
+    description: "Movement of value."
+    attributes: [timestamp, amount, currency, status]
+    participants: [source_account, destination_account, facilitating_org]
+  PhysicalMovement:
+    description: "Actor or Object moving between locations."
+    attributes: [start_time, end_time, method]
+    participants: [actor, object, origin, destination]
+  CyberAction:
+    description: "An interaction with digital infrastructure (login, access, exploit)."
+    attributes: [timestamp, action_type, outcome]
+    participants: [actor, source_ip, target_device, target_account]
+  CriminalIncident:
+    description: "The core crime event (murder, theft, fraud)."
+    attributes: [timestamp, crime_type, status]
+    participants: [perpetrator, victim, weapon, location]

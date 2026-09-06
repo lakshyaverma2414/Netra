@@ -31,3 +31,15 @@ class ResolutionResultItem(BaseModel):
 class ResolutionResponse(BaseModel):
     request_id: str
     results: List[ResolutionResultItem]
+
+
+class ProvenanceLink(BaseModel):
+    record_id: str
+    mention_id: str
+    confidence: float
+
+class CanonicalEntity(BaseModel):
+    entity_id: str
+    entity_type: str
+    canonical_name: str
+    source_mentions: List[ProvenanceLink]

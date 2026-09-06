@@ -1,0 +1,15 @@
+netra:Context:
+  label: Context
+  description: Boundary or scope of a set of facts.
+netra:Case:
+  label: Case
+  parent: netra:Context
+  description: An investigative boundary (e.g., an FIR or Operation).
+netra:Jurisdiction:
+  label: Jurisdiction
+  parent: netra:Context
+  description: Legal or geographic authority boundary.
+netra:SourceSystem:
+  label: Source System
+  parent: netra:Context
+  description: The origin system providing the data.

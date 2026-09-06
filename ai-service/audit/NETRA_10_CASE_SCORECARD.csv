@@ -1,0 +1,11 @@
+case_id,files,structured_records,evidence_count,entities_extracted,entities_confirmed,entities_unresolved,relationship_candidates,relationships_confirmed,relationships_review,relationships_rejected,age_vertices,age_edges,expected_relationships,discovered_expected_relationships,entity_precision,entity_recall,entity_f1,relationship_precision,relationship_recall,relationship_f1,cross_case_links,multi_hop_paths,primary_failure_stage
+C-001,2,0,2,0,0,0,0,0,0,0,0,0,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,0,0,Extraction
+C-002,1,0,1,8,7,0,6,2,0,0,7,2,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,0,0,None
+C-003,3,0,3,0,0,0,0,0,0,0,0,0,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,0,0,Extraction
+C-004,2,0,2,0,0,0,0,0,0,0,0,0,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,0,0,Extraction
+C-005,2,0,2,6,6,0,4,1,0,0,6,1,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,0,0,None
+C-006,1,0,1,10,8,0,8,3,0,0,8,3,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,0,0,None
+C-007,3,0,3,0,0,0,0,0,0,0,0,0,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,0,0,Extraction
+C-008,2,0,2,12,7,0,8,2,0,0,7,2,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,0,0,None
+C-009,1,0,1,14,11,0,11,4,0,0,11,4,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,0,0,None
+C-010,4,0,4,10,8,0,8,3,0,0,8,3,N/A,N/A,N/A,N/A,N/A,N/A,N/A,N/A,0,0,None

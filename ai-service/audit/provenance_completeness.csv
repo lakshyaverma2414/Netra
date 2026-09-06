@@ -1,0 +1,31 @@
+case_id,relationship_id,assertion_id,observation_id,provenance_chain_intact
+C-002,TEST-R-4db842f5,7b559577-b422-4dd5-b35b-d02d08554c66,,NO
+C-002,TEST-R-4db842f5,bc328a27-e0e6-4087-be1e-b146b93ab002,438bfc34-73d8-44a0-8778-83f18d164fe5,PARTIAL (missing source_record)
+C-002,TEST-R-55c07519,f0b7be4f-bcb2-4e8e-b0a4-4636f933948d,,NO
+C-002,TEST-R-55c07519,950b9404-8142-4dd2-b90d-8dd5d248ca6e,438bfc34-73d8-44a0-8778-83f18d164fe5,PARTIAL (missing source_record)
+C-005,TEST-R-627f41fe,de8cdb85-0887-44b1-8ebb-99450ca5b933,,NO
+C-005,TEST-R-627f41fe,3e2adeb0-04f8-4185-898c-bff34c1b0cdd,969ca5d6-cc0f-4dcb-a360-ded154573914,PARTIAL (missing source_record)
+C-006,TEST-R-d55dea06,02be8f26-17fd-494b-ba43-3321a4f03db2,,NO
+C-006,TEST-R-d55dea06,f7e59b18-300a-4103-9adf-239a7e7679ce,36131110-a83b-43a0-ada8-e966d867721e,PARTIAL (missing source_record)
+C-006,TEST-R-fd368612,bb265ad3-e91f-4293-9d07-d07e631cd21e,,NO
+C-006,TEST-R-fd368612,48b26be3-2626-43ca-870d-805a50ee86c4,36131110-a83b-43a0-ada8-e966d867721e,PARTIAL (missing source_record)
+C-006,TEST-R-e5fabc8a,f561c811-bd72-4b0c-bcae-5afa78b53f3e,,NO
+C-006,TEST-R-e5fabc8a,566ff0fb-0573-4d2a-bcc8-f58d750a5265,36131110-a83b-43a0-ada8-e966d867721e,PARTIAL (missing source_record)
+C-008,TEST-R-b6d316ad,56f16bac-1256-4e1b-9c47-bfebc65002c7,,NO
+C-008,TEST-R-b6d316ad,f8b5972e-bdda-4ebf-ac26-49bee18e739c,ad056c6c-5bda-4202-b04c-fe5652f5339c,PARTIAL (missing source_record)
+C-008,TEST-R-98714c0e,936b7958-4e74-4191-8a74-c853c0e7ce37,,NO
+C-008,TEST-R-98714c0e,2813c993-da86-4a1b-8e91-a0febac1654f,ad056c6c-5bda-4202-b04c-fe5652f5339c,PARTIAL (missing source_record)
+C-009,TEST-R-1472026b,25415f8e-b49e-4ad0-9173-081c465864a5,,NO
+C-009,TEST-R-1472026b,8fb3a34f-d07f-41c5-b14b-561a1a0a6f40,dd37e5c6-e002-48fa-838e-c5dfcd5d3d02,PARTIAL (missing source_record)
+C-009,TEST-R-8fb2cf26,927b9888-ed6e-4781-9c3c-4f25ed35fb30,,NO
+C-009,TEST-R-8fb2cf26,d52f8f51-01bf-458c-856c-339d63607fb5,dd37e5c6-e002-48fa-838e-c5dfcd5d3d02,PARTIAL (missing source_record)
+C-009,TEST-R-f9fb8444,dd166088-a33d-4192-ac8b-a6050547c1be,,NO
+C-009,TEST-R-f9fb8444,e62a634c-a39d-499c-821f-7710a17f42b3,dd37e5c6-e002-48fa-838e-c5dfcd5d3d02,PARTIAL (missing source_record)
+C-009,TEST-R-cf384fed,d413eb77-81a8-4d88-8056-02bfa74dba35,,NO
+C-009,TEST-R-cf384fed,f7015e0c-6207-44d3-89de-7807e95cd7ca,dd37e5c6-e002-48fa-838e-c5dfcd5d3d02,PARTIAL (missing source_record)
+C-010,TEST-R-9cfeeda4,bd6dd127-00b8-4d68-a427-24bce75dc33c,,NO
+C-010,TEST-R-9cfeeda4,06390110-01c8-4e57-966e-f34f7cd98900,954d95e5-2911-4684-b471-c383dbe1f2ac,PARTIAL (missing source_record)
+C-010,TEST-R-7b695508,2201060a-b89b-48af-8af5-0768b23f4d56,,NO
+C-010,TEST-R-7b695508,4b1ac431-4f09-4805-a4e2-62f3a5651053,954d95e5-2911-4684-b471-c383dbe1f2ac,PARTIAL (missing source_record)
+C-010,TEST-R-8532d6e6,f7c507a0-2fd9-40cf-8fab-1b59d8c0ac26,,NO
+C-010,TEST-R-8532d6e6,7160323a-a695-4531-9173-8f677337b786,954d95e5-2911-4684-b471-c383dbe1f2ac,PARTIAL (missing source_record)
