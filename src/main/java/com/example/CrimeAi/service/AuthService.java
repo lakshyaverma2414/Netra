@@ -85,4 +85,7 @@ public class AuthService {
                 userResponse
         );
     }
+    public String generateTestPasswordHash() {
+        return passwordEncoder.encode("password123");
+    }
 }

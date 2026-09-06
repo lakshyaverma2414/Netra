@@ -1,5 +1,0 @@
-case_id,evidence_exists,processing_run_exists,text_extracted,text_length,qwen_invoked,qwen_response,json_valid,entities_returned,relationships_returned,exception
-C-001,YES,YES (Failed),YES,> 4000 chars,YES,Unterminated string starting at line X,NO,0,0,LLM Context Window Overflow / JSON Truncation
-C-003,YES,YES (Failed),YES,> 4000 chars,YES,Unterminated string starting at line X,NO,0,0,LLM Context Window Overflow / JSON Truncation
-C-004,YES,YES (Failed),YES,> 4000 chars,YES,Unterminated string starting at line X,NO,0,0,LLM Context Window Overflow / JSON Truncation
-C-007,YES,YES (Failed),YES,> 4000 chars,YES,Unterminated string starting at line X,NO,0,0,LLM Context Window Overflow / JSON Truncation

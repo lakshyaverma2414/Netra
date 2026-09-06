@@ -2,6 +2,7 @@ package com.example.CrimeAi.controller;
 
 import com.example.CrimeAi.dto.CaseResponse;
 import com.example.CrimeAi.dto.CreateCaseRequest;
+import com.example.CrimeAi.fabric.FabricGatewayService;
 import com.example.CrimeAi.service.CaseService;
 
 import jakarta.validation.Valid;
@@ -18,9 +19,14 @@ import java.util.List;
 public class CaseController {
 
     private final CaseService caseService;
+    private final FabricGatewayService fabricGatewayService;
 
-    public CaseController(CaseService caseService) {
+    public CaseController(
+            CaseService caseService,
+            FabricGatewayService fabricGatewayService) {
+
         this.caseService = caseService;
+        this.fabricGatewayService = fabricGatewayService;
     }
 
     @PostMapping
@@ -47,6 +53,21 @@ public class CaseController {
         return ResponseEntity.ok(
                 caseService.getCaseById(caseId)
         );
+    }
+
+    /**
+     * Get Fabric audit history for a case.
+     *
+     * GET /api/cases/{caseId}/audit
+     */
+    @GetMapping("/{caseId}/audit")
+    public ResponseEntity<String> getCaseAudit(
+            @PathVariable String caseId) {
+
+        String audit =
+                fabricGatewayService.getCaseAudits(caseId);
+
+        return ResponseEntity.ok(audit);
     }
 
     @PutMapping("/{caseId}")

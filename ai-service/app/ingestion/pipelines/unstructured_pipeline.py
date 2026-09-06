@@ -1,4 +1,4 @@
-import logging
+﻿import logging
 import uuid
 import hashlib
 import os
@@ -114,7 +114,6 @@ def process_unstructured_evidence(db: Session, batch_id: uuid.UUID, filepath: st
     # 4. Invoke Real Qwen Extraction
     llm_response = extract_relationships_with_qwen(raw_text)
     if llm_response and llm_response.relationships:
-        logger.info(f"Qwen extracted {len(llm_response.relationships)} relationships from {filepath}")
         mentions = []
         assertions = []
         orchestrator = IngestionOrchestrator(db)
@@ -132,27 +131,23 @@ def process_unstructured_evidence(db: Session, batch_id: uuid.UUID, filepath: st
             mentions.append(MentionInput(
                 text=rel.source_text,
                 entity_type=src_type,
-                source_record_id=None,  # entity_mentions FK → source_records; not evidence
+                source_record_id=None,
                 observation_id=str(obs.observation_id)
             ))
             mentions.append(MentionInput(
                 text=rel.target_text,
                 entity_type=tgt_type,
-                source_record_id=None,  # entity_mentions FK → source_records; not evidence
+                source_record_id=None,
                 observation_id=str(obs.observation_id)
             ))
             assertions.append({
                 "source_mention": rel.source_text,
                 "target_mention": rel.target_text,
-                "type": rel.relationship_type.name if hasattr(rel.relationship_type, 'name') else str(rel.relationship_type),
-                "evidence_id": ev.evidence_id,
+                "type": rel.relationship_type.name if hasattr(rel.relationship_type, 'name') else str(rel.relationship_type)
             })
             
         if assertions:
             orchestrator.process_observation(obs, case_id, mentions, assertions)
-    else:
-        logger.warning(f"Qwen returned no relationships for {filepath}")
 
     bm.update_batch_stats(batch_id, received=1, failed=0, complete=True)
-
 

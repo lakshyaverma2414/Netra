@@ -9,7 +9,6 @@ class ValidationStatusEnum(str, Enum):
 
 class ValidationRequest(BaseModel):
     case_id: str
-    assertion_id: Optional[str] = None
     source_entity_id: str
     relationship_type: str
     target_entity_id: str

@@ -26,15 +26,14 @@ from enum import Enum
 class EntityTypeEnum(str, Enum):
     PERSON = "PERSON"
     PHONE = "PHONE"
-    IMEI = "IMEI"
+    EMAIL = "EMAIL"
     VEHICLE = "VEHICLE"
     LOCATION = "LOCATION"
     ORGANIZATION = "ORGANIZATION"
-    EVENT = "EVENT"
-    BANK_ACCOUNT = "BANK_ACCOUNT"
-    UPI_ID = "UPI_ID"
-    SOCIAL_ACCOUNT = "SOCIAL_ACCOUNT"
+    UPI = "UPI"
+    ACCOUNT = "ACCOUNT"
     CASE = "CASE"
+    DATE = "DATE"
 
 class RelationshipTypeEnum(str, Enum):
     USES = "USES"

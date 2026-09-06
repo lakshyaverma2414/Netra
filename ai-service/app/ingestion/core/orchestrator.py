@@ -64,15 +64,13 @@ class IngestionOrchestrator:
                     
                     # Call existing Validation Service
                     val_req = ValidationRequest(
-                        assertion_id=str(assertion.assertion_id),
                         case_id=case_id,
                         source_entity_id=src_ent_id,
                         relationship_type=ma["type"],
                         target_entity_id=tgt_ent_id,
                         extracted_text=observation.raw_text,
-                        source_record_id=observation.source_record_id or ma.get("evidence_id"),
-                        evidence_ids=[str(observation.source_record_id)] if observation.source_record_id else
-                                     ([ma["evidence_id"]] if ma.get("evidence_id") else [])
+                        source_record_id=observation.source_record_id,
+                        evidence_ids=[str(observation.observation_id)]
                     )
                     
                     val_resp = validate_relationship(self.db, val_req)

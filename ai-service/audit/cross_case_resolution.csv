@@ -1,2 +1,0 @@
-finding,reason
-No shared canonical entities across cases.,Entity resolution runs in isolation per document/case.

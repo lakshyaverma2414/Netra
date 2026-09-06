@@ -1,32 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { PageTransition } from '../components/PageTransition';
 import Sidebar from '../components/Sidebar';
-import { fetchWithAuth } from '../api/apiClient';
 
 const Upload = () => {
     const [isDragging, setIsDragging] = useState(false);
-    const [uploadStatus, setUploadStatus] = useState<'idle' | 'uploading' | 'complete' | 'error'>('idle');
+    const [uploadStatus, setUploadStatus] = useState<'idle' | 'uploading' | 'complete'>('idle');
     const [progress, setProgress] = useState(0);
-    const [cases, setCases] = useState<any[]>([]);
-    const [selectedCase, setSelectedCase] = useState<string>('');
-    const [errorMsg, setErrorMsg] = useState('');
-
-    useEffect(() => {
-        // Fetch cases from backend
-        fetchWithAuth('/api/cases')
-            .then(res => res.json())
-            .then(data => {
-                setCases(data);
-                const lastCase = localStorage.getItem('currentCaseId');
-                if (lastCase && data.find((c: any) => c.caseId === lastCase)) {
-                    setSelectedCase(lastCase);
-                } else if (data.length > 0) {
-                    setSelectedCase(data[0].caseId);
-                }
-            })
-            .catch(err => console.error('Failed to load cases', err));
-    }, []);
 
     const handleDrag = (e: React.DragEvent) => {
         e.preventDefault();
@@ -43,56 +23,31 @@ const Upload = () => {
         e.stopPropagation();
         setIsDragging(false);
         if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-            startUpload(e.dataTransfer.files[0]);
+            startUpload();
         }
     };
 
     const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files[0]) {
-            startUpload(e.target.files[0]);
+            startUpload();
         }
     };
 
-    const startUpload = async (file: File) => {
-        if (!selectedCase) {
-            alert("Please select a case first!");
-            return;
-        }
-
+    const startUpload = () => {
         setUploadStatus('uploading');
-        setProgress(10);
-        setErrorMsg('');
-
-        try {
-            const formData = new FormData();
-            formData.append('case_id', selectedCase);
-            formData.append('file', file);
-
-            // Mock progress since fetch doesn't support upload progress natively easily
-            const progressInterval = setInterval(() => {
-                setProgress(p => p < 90 ? p + 5 : p);
-            }, 1000);
-
-            const response = await fetchWithAuth('/api/v1/ingestion/upload/unstructured', {
-                method: 'POST',
-                body: formData
+        setProgress(0);
+        const interval = setInterval(() => {
+            setProgress(p => {
+                if (p >= 100) {
+                    clearInterval(interval);
+                    setTimeout(() => {
+                        setUploadStatus('complete');
+                    }, 500);
+                    return 100;
+                }
+                return p + 5;
             });
-
-            clearInterval(progressInterval);
-
-            if (!response.ok) {
-                const errorData = await response.json().catch(() => ({}));
-                throw new Error(errorData.detail || "Upload failed");
-            }
-
-            setProgress(100);
-            setTimeout(() => {
-                setUploadStatus('complete');
-            }, 500);
-        } catch (err: any) {
-            setErrorMsg(err.message);
-            setUploadStatus('error');
-        }
+        }, 100);
     };
 
     return (
@@ -107,20 +62,6 @@ const Upload = () => {
                         <p className="text-on-surface-variant">Upload CSV, JSON, or TXT files to automatically parse and add to the knowledge graph.</p>
                     </div>
 
-                    <div className="mb-6">
-                        <label className="block text-sm font-bold text-on-surface mb-2">Select Target Case</label>
-                        <select 
-                            value={selectedCase}
-                            onChange={(e) => setSelectedCase(e.target.value)}
-                            className="w-full px-4 py-3 bg-surface-container-low border border-outline-variant rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
-                        >
-                            <option value="" disabled>Select a case...</option>
-                            {cases.map((c) => (
-                                <option key={c.caseId} value={c.caseId}>{c.caseId} - {c.title}</option>
-                            ))}
-                        </select>
-                    </div>
-
                     {uploadStatus === 'idle' ? (
                         <div 
                             onDragEnter={handleDrag}
@@ -129,7 +70,7 @@ const Upload = () => {
                             onDrop={handleDrop}
                             className={`border-4 border-dashed rounded-2xl p-16 flex flex-col items-center justify-center transition-all cursor-pointer ${isDragging ? 'border-saffron-accent bg-saffron-accent/10' : 'border-outline-variant hover:border-primary hover:bg-surface-container-low'}`}
                         >
-                            <input type="file" id="file-upload" className="hidden" onChange={handleFileSelect} />
+                            <input type="file" id="file-upload" className="hidden" onChange={handleFileSelect} multiple />
                             <label htmlFor="file-upload" className="flex flex-col items-center cursor-pointer">
                                 <div className={`w-20 h-20 rounded-full flex items-center justify-center mb-4 transition-colors ${isDragging ? 'bg-saffron-accent text-white' : 'bg-primary-container text-primary'}`}>
                                     <span className="material-symbols-outlined text-4xl">cloud_upload</span>
@@ -142,26 +83,16 @@ const Upload = () => {
                     ) : uploadStatus === 'uploading' ? (
                         <div className="border border-outline-variant rounded-2xl p-16 flex flex-col items-center justify-center bg-surface-container-low">
                             <span className="material-symbols-outlined text-5xl text-primary animate-spin mb-6" style={{ fontVariationSettings: "'FILL' 0, 'wght' 300" }}>sync</span>
-                            <h3 className="text-xl font-bold text-primary mb-2">Processing Data with AI...</h3>
-                            <p className="text-on-surface-variant mb-8 text-center max-w-md">Extracting entities, resolving identities, and generating verified relationships for the AGE graph.</p>
+                            <h3 className="text-xl font-bold text-primary mb-2">Processing Data...</h3>
+                            <p className="text-on-surface-variant mb-8 text-center max-w-md">Extracting entities and generating relationships for the Graph Explorer.</p>
                             
                             <div className="w-full max-w-md bg-surface-container-highest rounded-full h-3 mb-2 overflow-hidden border border-outline-variant">
                                 <div className="bg-saffron-accent h-full transition-all duration-300 ease-out" style={{ width: progress + "%" }}></div>
                             </div>
                             <div className="w-full max-w-md flex justify-between text-sm font-bold">
-                                <span className="text-on-surface-variant">Uploading & Extracting</span>
+                                <span className="text-on-surface-variant">Uploading</span>
                                 <span className="text-primary">{progress}%</span>
                             </div>
-                        </div>
-                    ) : uploadStatus === 'error' ? (
-                        <div className="border border-outline-variant rounded-2xl p-16 flex flex-col items-center justify-center bg-error-container text-on-error-container">
-                            <span className="material-symbols-outlined text-5xl mb-6">error</span>
-                            <h3 className="text-xl font-bold mb-2">Upload Failed</h3>
-                            <p className="mb-8 text-center max-w-md">{errorMsg}</p>
-                            
-                            <button onClick={() => setUploadStatus('idle')} className="px-6 py-2 border border-current rounded-lg font-bold hover:bg-black/10 transition-colors">
-                                Try Again
-                            </button>
                         </div>
                     ) : (
                         <div className="border border-outline-variant rounded-2xl p-16 flex flex-col items-center justify-center bg-surface-container-low">
@@ -175,7 +106,7 @@ const Upload = () => {
                                 <button onClick={() => setUploadStatus('idle')} className="px-6 py-2 border border-outline-variant rounded-lg font-bold hover:bg-surface-container-highest transition-colors">
                                     Upload Another
                                 </button>
-                                <NavLink to={`/cases/${selectedCase}/network`} className="px-6 py-2 bg-saffron-accent text-white rounded-lg font-bold hover:bg-opacity-90 shadow-sm transition-colors">
+                                <NavLink to="/graph-explorer" className="px-6 py-2 bg-saffron-accent text-white rounded-lg font-bold hover:bg-opacity-90 shadow-sm transition-colors">
                                     View Graph Explorer
                                 </NavLink>
                             </div>

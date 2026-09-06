@@ -1,6 +1,0 @@
-﻿category,failure_description,pipeline_stage,impact,recommended_fix
-JSON Truncation,LLM output truncated due to large text size,Extraction,4 entire cases dropped,Implement text chunking or increase context window
-Ontology Constraints,Valid real-world relationships rejected by strict rules,Validation,14+ valid assertions dropped,Expand ONTOLOGY dictionary in validation_service.py
-Provenance Broken,Assertions not linked to source records,Persistence,100% of cases affected,Fix orchestrator.py to map source_record_id
-Assertion Status Bug,Assertions remain CANDIDATE even after canonicalization,Persistence,100% of validated assertions affected,Update assertion status to CONFIRMED post-validation
-Entity Resolution Isolation,Entities only resolved within a single case,Resolution,0 cross-case graph edges,Enable global entity resolution lookup using strong identifiers

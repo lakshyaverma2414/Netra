@@ -2,7 +2,7 @@ import { PageTransition } from '../components/PageTransition';
 import Sidebar from '../components/Sidebar';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { fetchWithAuth } from '../api/apiClient';
+import cases from '../mockData/cases.json';
 
 const StartInvestigation = () => {
     const navigate = useNavigate();
@@ -15,43 +15,50 @@ const StartInvestigation = () => {
     const [suspectPhone, setSuspectPhone] = useState('');
     const [suspectAddress, setSuspectAddress] = useState('');
 
-    const handleStart = async (e: React.FormEvent) => {
+    const handleStart = (e: React.FormEvent) => {
         e.preventDefault();
         
         const trimmedId = caseId.trim();
         if (!trimmedId) return;
 
-        try {
-            // Build the full description combining all the fields
-            const fullDescription = `Crime Type: ${crimeType}\nDate: ${date}\nLocation: ${location}\nSuspect Name: ${suspectName}\nSuspect Phone: ${suspectPhone}\nSuspect Address: ${suspectAddress}\n\nDescription:\n${description}`;
-
-            const currentOfficer = JSON.parse(localStorage.getItem('officer') || '{}').officerId || 'OFFICER_001';
-
-            const response = await fetchWithAuth('/api/cases', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    caseId: trimmedId,
-                    title: description ? description.substring(0, 30) + "..." : "New Investigation",
-                    description: fullDescription,
-                    status: "ACTIVE",
-                    assignedTo: currentOfficer
-                })
-            });
-
-            if (!response.ok) {
-                const errorData = await response.json().catch(() => ({}));
-                throw new Error(errorData.message || "Failed to create case");
-            }
-
-            // Save the last created case ID to localStorage for the upload screen to default to
-            localStorage.setItem('currentCaseId', trimmedId);
-            
-            // Navigate to upload screen
-            navigate('/upload');
-        } catch (error: any) {
-            alert(`Error creating investigation: ${error.message}`);
+        // Check if case already exists in mock data
+        const exists = cases.some(c => c.id === trimmedId);
+        
+        if (exists) {
+            // Open existing investigation to prevent duplicates
+            navigate(`/cases/${trimmedId}`);
+            return;
         }
+
+        // Mock saving the new investigation
+        const newCase = {
+            id: trimmedId,
+            title: description ? description.substring(0, 30) + "..." : "New Investigation",
+            crimeType,
+            dateOfIncident: date,
+            location,
+            description,
+            initialSuspect: {
+                name: suspectName,
+                phone: suspectPhone,
+                address: suspectAddress
+            },
+            finalResult: "Investigation Ongoing",
+            status: "ACTIVE",
+            risk: "UNKNOWN",
+            investigationProgress: 0,
+            tasks: { completed: 0, total: 0 },
+            evidence: 0,
+            leads: 0,
+            assignedOfficer: "Current Officer",
+            lastActivity: "Just now",
+            creationDate: new Date().toISOString().split('T')[0]
+        };
+        const savedCases = JSON.parse(localStorage.getItem('userCases') || '[]');
+        savedCases.push(newCase);
+        localStorage.setItem('userCases', JSON.stringify(savedCases));
+
+        navigate('/upload');
     };
 
     return (

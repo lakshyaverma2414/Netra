@@ -1,8 +1,0 @@
-pattern:
-  description: Identify entities that connect otherwise separate cases.
-  id: cross_case_bridge
-  parameters:
-    minimum_cases: 2
-  query_template: "\n            SELECT entity_id, COUNT(DISTINCT case_id) as case_count\n\
-    \            FROM case_entities\n            GROUP BY entity_id\n            HAVING\
-    \ COUNT(DISTINCT case_id) >= :minimum_cases\n        "

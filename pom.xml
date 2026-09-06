@@ -60,6 +60,20 @@
 
 
 
+
+			<!-- Existing dependencies -->
+
+		<dependency>
+			<groupId>org.hyperledger.fabric</groupId>
+			<artifactId>fabric-gateway</artifactId>
+			<version>1.4.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>io.grpc</groupId>
+			<artifactId>grpc-netty-shaded</artifactId>
+			<version>1.83.1</version>
+		</dependency>
 		<!-- ====================================== -->
 		<!-- Spring Security                       -->
 		<!-- Login + JWT Security                   -->
